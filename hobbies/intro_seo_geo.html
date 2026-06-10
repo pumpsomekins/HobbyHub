@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HobbyHub — Explore Hobbies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange: #F1641E;
+  --orange-light: #F4831F;
+  --orange-bg: #FFF8F5;
+  --black: #222222;
+  --gray: #6B6B6B;
+  --border: #e0d8d2;
+  --white: #FFFFFF;
+  --cream: #FAF7F5;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); }
+
+/* ── NAV ── */
+nav {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 999;
+  padding: 0 2rem; height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--orange); letter-spacing: -0.02em; text-decoration: none; }
+.nav-back { font-size: 0.85rem; color: var(--gray); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-back:hover { color: var(--orange); }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #fff8f5 0%, #fef0e8 50%, #fff5f0 100%);
+  padding: 3.5rem 2rem; text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero h1 { font-size: 2.2rem; font-weight: 800; color: var(--black); letter-spacing: -0.03em; }
+.hero p  { font-size: 1rem; color: var(--gray); margin-top: 0.6rem; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+/* ── HOBBY GRID ── */
+.grid-section { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+.hobby-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+
+.hobby-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.8rem; cursor: pointer; transition: all 0.2s;
+  display: flex; flex-direction: column; gap: 0.8rem;
+  text-decoration: none; color: inherit;
+}
+.hobby-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+  border-color: #f9cdb5;
+}
+.hobby-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+}
+.hobby-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); }
+.hobby-card p  { font-size: 0.82rem; color: var(--gray); line-height: 1.55; flex: 1; }
+.hobby-meta {
+  display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
+  font-size: 0.72rem; color: var(--gray);
+}
+.hobby-tag {
+  background: var(--cream); border: 1px solid var(--border);
+  border-radius: 2rem; padding: 0.2rem 0.7rem; font-size: 0.7rem;
+  font-weight: 500;
+}
+.hobby-status {
+  margin-left: auto; font-weight: 600; font-size: 0.72rem;
+  padding: 0.2rem 0.6rem; border-radius: 2rem;
+}
+.status-live  { background: #edf7ee; color: #2e7d32; }
+.status-soon  { background: #fef3e2; color: #c27c00; }
+
+/* icon bg colors */
+.icon-mixology    { background: #fff0e8; }
+.icon-woodworking { background: #f3e8dc; }
+.icon-baking      { background: #fff8e5; }
+.icon-gardening   { background: #eaf5ea; }
+.icon-photography { background: #e8f0fe; }
+.icon-knitting    { background: #fde8f0; }
+.icon-painting    { background: #f3e8ff; }
+.icon-candle      { background: #fff5eb; }
+.icon-embroidery  { background: #fce4ec; }
+.icon-guitar      { background: #e8f5fb; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  nav { padding: 0 1rem; }
+  .hero { padding: 2.5rem 1rem; }
+  .hero h1 { font-size: 1.6rem; }
+  .grid-section { padding: 1.5rem 1rem 3rem; }
+  .hobby-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="../index.html" class="nav-logo">HobbyHub</a>
+  <a href="../index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>Pick a Hobby, Start Creating</h1>
+  <p>Every hobby has a hands-on craft that AI can't replace. Browse, learn, and turn your passion into something real.</p>
+</section>
+
+<!-- ── HOBBY GRID ── -->
+<section class="grid-section">
+  <div class="hobby-grid">
+
+    <!-- 1. Mixology -->
+    <a href="mixology/mixology.html" class="hobby-card">
+      <div class="hobby-icon icon-mixology">🍸</div>
+      <h3>Mixology</h3>
+      <p>Craft cocktails from classic recipes to modern twists. Learn techniques, flavor balancing, and impress at any gathering.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">recipes</span>
+        <span class="hobby-tag">flavour</span>
+        <span class="hobby-status status-live">Live</span>
+      </div>
+    </a>
+
+    <!-- 2. Woodworking -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-woodworking">🪵</div>
+      <h3>Woodworking</h3>
+      <p>Shape raw timber into furniture, decor, and functional art. From hand tools to joinery — build things that last.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">furniture</span>
+        <span class="hobby-tag">carving</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- 3. Baking -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-baking">🍞</div>
+      <h3>Baking</h3>
+      <p>Master sourdough, pastries, cakes and beyond. Precision meets creativity in the most delicious hobby of all.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">bread</span>
+        <span class="hobby-tag">pastry</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- 4. Gardening -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-gardening">🪴</div>
+      <h3>Gardening</h3>
+      <p>Grow your own herbs, vegetables, and flowers. Learn soil care, companion planting, and sustainable garden design.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">urban</span>
+        <span class="hobby-tag">herbs</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- 5. Photography -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-photography">📷</div>
+      <h3>Photography</h3>
+      <p>Compose, light, and capture moments that matter. From smartphone basics to manual DSLR — see the world differently.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">DSLR</span>
+        <span class="hobby-tag">editing</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- 6. Knitting -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-knitting">🧶</div>
+      <h3>Knitting &amp; Crochet</h3>
+      <p>Yarn, needles, and endless patterns. Create cozy wearables, blankets, and handmade gifts stitch by stitch.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">wearables</span>
+        <span class="hobby-tag">amigurumi</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- 7. Painting -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-painting">🎨</div>
+      <h3>Painting</h3>
+      <p>Watercolour, acrylic, or oil — put brush to canvas and express what words cannot. All skill levels welcome.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">watercolour</span>
+        <span class="hobby-tag">acrylic</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- 8. Candle Making -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-candle">🕯️</div>
+      <h3>Candle Making</h3>
+      <p>Blend wax, fragrance, and creativity. Design custom scented candles for relaxation, gifts, or a side business.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">soy wax</span>
+        <span class="hobby-tag">aromatherapy</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- 9. Embroidery -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-embroidery">🧵</div>
+      <h3>Embroidery</h3>
+      <p>Thread art on fabric — from traditional stitches to modern hoop designs. Slow, mindful, and deeply satisfying.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">hoop art</span>
+        <span class="hobby-tag">stitching</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- 10. Guitar -->
+    <div class="hobby-card">
+      <div class="hobby-icon icon-guitar">🎸</div>
+      <h3>Guitar</h3>
+      <p>Learn chords, fingerpicking, and your favourite songs. Acoustic or electric — start strumming from day one.</p>
+      <div class="hobby-meta">
+        <span class="hobby-tag">acoustic</span>
+        <span class="hobby-tag">tablature</span>
+        <span class="hobby-status status-soon">Coming Soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
