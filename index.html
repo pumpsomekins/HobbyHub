@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HobbyDIYnSkill — Learn. Create. Earn.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange: #F1641E;
+  --orange-light: #F4831F;
+  --orange-bg: #FFF8F5;
+  --black: #222222;
+  --gray: #6B6B6B;
+  --gray-light: #e8e3df;
+  --border: #e0d8d2;
+  --white: #FFFFFF;
+  --cream: #FAF7F5;
+  --badge-kit: #e8f4fd;
+  --badge-kit-text: #1a73c8;
+  --badge-creation: #fef3e2;
+  --badge-creation-text: #c27c00;
+  --badge-course: #edf7ee;
+  --badge-course-text: #2e7d32;
+  --badge-camp: #f3e8ff;
+  --badge-camp-text: #7b1fa2;
+  --red: #ef4444;
+  --red-light: #fee2e2;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+/* ── TOP UTILITY BAR ── */
+.util-bar {
+  background: var(--black); color: rgba(255,255,255,0.75);
+  font-size: 0.75rem; text-align: center; padding: 0.45rem 1rem;
+  letter-spacing: 0.02em;
+}
+.util-bar a { color: #F1641E; text-decoration: none; font-weight: 600; }
+
+/* ── NAV ── */
+nav {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 999;
+  padding: 0 2rem; height: 68px;
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center;
+}
+.nav-logo {
+  font-size: 1.5rem; font-weight: 800; color: var(--orange); white-space: nowrap;
+  letter-spacing: -0.02em; cursor: pointer;
+}
+.nav-left-group { display: flex; align-items: center; }
+.nav-ai-forum { display: flex; align-items: center; gap: 0.5rem; margin-left: 0.8rem; }
+.nav-search {
+  width: 100%; max-width: 800px; justify-self: center;
+  display: flex; align-items: center;
+  border: 2px solid var(--border); border-radius: 3rem; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.nav-search:focus-within { border-color: var(--orange); }
+.nav-search select {
+  border: none; border-right: 1px solid var(--border); background: var(--cream);
+  padding: 0 1rem; height: 44px; font-size: 0.8rem; color: var(--gray);
+  cursor: pointer; outline: none; flex-shrink: 0;
+}
+.nav-search input {
+  flex: 1; border: none; padding: 0 1rem; font-size: 0.88rem; outline: none;
+  background: transparent; color: var(--black);
+}
+.nav-search input::placeholder { color: #b0a8a0; }
+.nav-search button {
+  background: var(--orange); border: none; padding: 0 1.2rem; height: 44px;
+  cursor: pointer; color: white; font-size: 1rem; flex-shrink: 0;
+  transition: background 0.2s;
+}
+.nav-search button:hover { background: var(--orange-light); }
+.nav-search .stash-icon-btn {
+  background: transparent; color: var(--gray); border: none; border-left: 1px solid var(--border);
+  padding: 0 0.9rem; height: 44px; cursor: pointer; font-size: 1.15rem; flex-shrink: 0;
+  transition: color 0.2s;
+}
+.nav-search .stash-icon-btn:hover { color: var(--orange); background: transparent; }
+.nav-actions { display: flex; align-items: center; gap: 0.6rem; justify-self: end; }
+.nav-gift-icon {
+  position: relative; font-size: 1.1rem; cursor: pointer; padding: 0.3rem; transition: transform 0.2s;
+}
+.nav-gift-icon:hover { transform: scale(1.1); }
+.nav-gift-badge {
+  position: absolute; top: -2px; right: -2px; background: var(--red); color: white;
+  font-size: 0.55rem; font-weight: 800; padding: 1px 5px; border-radius: 50%;
+  min-width: 16px; text-align: center;
+}
+.nav-sell-btn {
+  font-size: 0.68rem; font-weight: 600; color: var(--black);
+  text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 3px;
+  white-space: nowrap; transition: color 0.2s;
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  line-height: 1.2; text-align: center;
+}
+.nav-sell-btn:hover { color: var(--orange); }
+.nav-sell-icon { font-size: 1.1rem; }
+.nav-divider { width: 1px; height: 24px; background: var(--border); }
+.nav-signin {
+  font-size: 0.82rem; font-weight: 600; background: var(--white);
+  border: 1.5px solid var(--border); border-radius: 3rem; padding: 0.45rem 1rem;
+  cursor: pointer; color: var(--black); transition: all 0.2s; white-space: nowrap;
+}
+.nav-signin:hover { border-color: var(--orange); color: var(--orange); }
+.nav-register {
+  font-size: 0.82rem; font-weight: 700; background: var(--orange);
+  border: none; border-radius: 3rem; padding: 0.5rem 1.1rem;
+  cursor: pointer; color: white; transition: background 0.2s; white-space: nowrap;
+}
+.nav-register:hover { background: #d4521a; }
+
+/* ── CATEGORY TABS ── */
+.cat-bar {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 2rem; display: flex; gap: 0; overflow-x: auto;
+  scrollbar-width: none; position: sticky; top: 68px; z-index: 998;
+}
+.cat-bar::-webkit-scrollbar { display: none; }
+.cat-tab {
+  flex-shrink: 0; padding: 0 1.2rem; height: 48px;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.84rem; font-weight: 500; color: var(--gray);
+  border-bottom: 2.5px solid transparent; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap; text-decoration: none;
+}
+.cat-tab:hover { color: var(--black); border-bottom-color: var(--border); }
+.cat-tab.active { color: var(--black); font-weight: 700; border-bottom-color: var(--black); }
+.cat-tab.gift-tab { position: relative; }
+.cat-tab.gift-tab::after {
+  content: ''; position: absolute; top: 8px; right: 8px; width: 6px; height: 6px;
+  background: var(--red); border-radius: 50%; animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* ── HERO BANNER ── */
+.hero-banner {
+  background: linear-gradient(135deg, #2d1a00 0%, #4a2800 40%, #1a0d00 100%);
+  padding: 3.5rem 2rem; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; min-height: 260px;
+}
+.hero-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 60% 50%, rgba(241,100,30,0.15) 0%, transparent 70%);
+}
+.hero-inner { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; position: relative; z-index: 1; }
+.hero-text { }
+.hero-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.7rem; }
+.hero-title { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 0.8rem; }
+.hero-sub { font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 1.5rem; max-width: 500px; }
+.hero-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.btn-orange { background: var(--orange); color: white; padding: 0.7rem 1.5rem; font-size: 0.85rem; font-weight: 700; border: none; border-radius: 3px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; }
+.btn-orange:hover { background: #d4521a; transform: translateY(-1px); }
+.btn-white-outline { background: transparent; color: rgba(255,255,255,0.85); padding: 0.7rem 1.5rem; font-size: 0.85rem; font-weight: 600; border: 1.5px solid rgba(255,255,255,0.25); border-radius: 3px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; }
+.btn-white-outline:hover { border-color: var(--orange); color: var(--orange); }
+.hero-calc-mini { background: rgba(255,255,255,0.05); border: 1px solid rgba(241,100,30,0.3); border-radius: 10px; padding: 1.5rem; min-width: 280px; }
+.hcm-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+.hcm-row { margin-bottom: 0.9rem; }
+.hcm-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); display: flex; justify-content: space-between; margin-bottom: 0.35rem; }
+.hcm-label b { color: rgba(255,255,255,0.85); }
+input[type=range] { width: 100%; accent-color: var(--orange); cursor: pointer; height: 3px; }
+.hcm-result { font-size: 1.8rem; font-weight: 800; color: var(--orange); text-align: center; margin-top: 0.8rem; }
+.hcm-result-label { font-size: 0.68rem; color: rgba(255,255,255,0.35); text-align: center; }
+
+/* ── SECTION HEADING ── */
+.section-head { max-width: 1200px; margin: 0 auto 1.5rem; padding: 0 2rem; display: flex; align-items: baseline; justify-content: space-between; }
+.section-head h2 { font-size: 1.25rem; font-weight: 800; color: var(--black); }
+.section-head a { font-size: 0.82rem; color: var(--orange); text-decoration: none; font-weight: 600; }
+.section-head a:hover { text-decoration: underline; }
+
+/* ── MAIN GRID LAYOUT ── */
+.main-content { max-width: 1200px; margin: 0 auto; padding: 1.4rem 2rem 2.5rem; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+
+/* ── COLUMN HEADERS ── */
+.col-header {
+  background: var(--cream); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem 1.2rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem;
+}
+.col-header-icon { font-size: 1.4rem; }
+.col-header-text h3 { font-size: 0.95rem; font-weight: 700; color: var(--black); }
+.col-header-text p { font-size: 0.75rem; color: var(--gray); margin-top: 0.1rem; }
+.col-header-text a { font-size: 0.72rem; color: var(--orange); text-decoration: none; font-weight: 600; }
+
+/* ── LISTING CARDS ── */
+.listing-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; cursor: pointer; transition: all 0.2s; margin-bottom: 1rem;
+}
+.listing-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+.listing-img {
+  width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem; position: relative; overflow: hidden;
+}
+.listing-badge {
+  position: absolute; top: 8px; left: 8px;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.22rem 0.6rem; border-radius: 2rem; border: 1px solid transparent;
+}
+.badge-kit     { background: var(--badge-kit);      color: var(--badge-kit-text);      border-color: #c8e4fa; }
+.badge-creation{ background: var(--badge-creation);  color: var(--badge-creation-text); border-color: #f9d9a0; }
+.badge-course  { background: var(--badge-course);    color: var(--badge-course-text);   border-color: #b2dfb8; }
+.badge-camp    { background: var(--badge-camp);      color: var(--badge-camp-text);     border-color: #d8b4fe; }
+.listing-body { padding: 0.9rem; }
+.listing-seller { font-size: 0.7rem; color: var(--gray); margin-bottom: 0.3rem; }
+.listing-name { font-size: 0.88rem; font-weight: 600; color: var(--black); line-height: 1.35; margin-bottom: 0.4rem; }
+.listing-stars { font-size: 0.72rem; color: #d4a500; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem; }
+.listing-stars span { color: var(--gray); }
+.listing-price { font-size: 1rem; font-weight: 800; color: var(--black); }
+.listing-price-sub { font-size: 0.7rem; color: var(--gray); font-weight: 400; }
+.listing-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; }
+.listing-tag { font-size: 0.65rem; font-weight: 500; background: var(--cream); border: 1px solid var(--border); border-radius: 2rem; padding: 0.15rem 0.5rem; color: var(--gray); }
+
+/* ── SELL BANNER ── */
+.sell-banner {
+  background: linear-gradient(135deg, #fff8f5 0%, #fef0e8 100%);
+  border: 1.5px solid #f9cdb5; border-radius: 10px; padding: 2rem;
+  text-align: center; margin: 2rem 0;
+}
+.sell-banner h3 { font-size: 1.2rem; font-weight: 800; color: var(--black); margin-bottom: 0.4rem; }
+.sell-banner p { font-size: 0.85rem; color: var(--gray); margin-bottom: 1.2rem; line-height: 1.6; }
+.sell-banner-btns { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+
+/* ── EXPLORE HOBBIES STRIP ── */
+.explore-strip { background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.2rem 2rem; }
+.explore-strip-inner { max-width: 1200px; margin: 0 auto; }
+.explore-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.8rem; }
+.chips { display: flex; gap: 0.6rem; overflow-x: auto; scrollbar-width: none; flex-wrap: wrap; }
+.chip {
+  flex-shrink: 0; background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 2rem; padding: 0.4rem 0.9rem; cursor: pointer;
+  font-size: 0.78rem; font-weight: 500; color: var(--black);
+  transition: all 0.2s; white-space: nowrap;
+}
+.chip:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-bg); }
+.chip.active { border-color: var(--orange); background: var(--orange); color: white; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black); color: rgba(255,255,255,0.6);
+  padding: 3.5rem 2rem 2rem; margin-top: 4rem;
+}
+.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+.footer-logo { font-size: 1.3rem; font-weight: 800; color: var(--orange); margin-bottom: 0.6rem; }
+.footer-brand p { font-size: 0.78rem; line-height: 1.7; color: rgba(255,255,255,0.4); }
+.footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 0.9rem; }
+.footer-col a { display: block; font-size: 0.8rem; color: rgba(255,255,255,0.4); text-decoration: none; margin-bottom: 0.45rem; transition: color 0.2s; }
+.footer-col a:hover { color: rgba(255,255,255,0.85); }
+.footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.footer-bottom p { font-size: 0.73rem; color: rgba(255,255,255,0.25); }
+.footer-hub { font-size: 0.73rem; color: var(--orange); text-decoration: none; font-weight: 600; }
+.footer-hub:hover { color: #f4831f; }
+
+/* ── FOR-SOMEONE STRIP ── */
+.for-someone-strip {
+  background: var(--cream); border-bottom: 1px solid var(--border);
+  padding: 1.1rem 2rem;
+}
+.for-someone-inner {
+  max-width: 1200px; margin: 0 auto; justify-content: center;
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.for-group { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.for-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--gray); white-space: nowrap;
+}
+.for-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.for-pill {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 2rem; padding: 0.32rem 0.85rem; cursor: pointer;
+  font-size: 0.78rem; font-weight: 500; color: var(--black);
+  transition: all 0.2s; white-space: nowrap; font-family: inherit;
+}
+.for-pill:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-bg); }
+.for-pill.active { border-color: var(--orange); background: var(--orange); color: white; }
+.for-pill.pink:hover, .for-pill.pink.active { border-color: #e91e8c; background: #e91e8c; color: white; }
+.for-pill.blue:hover, .for-pill.blue.active { border-color: #1565c0; background: #1565c0; color: white; }
+.for-divider { width: 1px; height: 32px; background: var(--border); flex-shrink: 0; }
+
+/* ── GIFT MODAL & UI ── */
+.gift-modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10000;
+  display: none; align-items: center; justify-content: center; padding: 1rem;
+}
+.gift-modal.open { display: flex; }
+.gift-modal-content {
+  background: var(--white); border-radius: 12px; max-width: 520px; width: 100%;
+  max-height: 90vh; overflow-y: auto; position: relative;
+}
+.gift-modal-header {
+  padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.gift-modal-header h3 { font-size: 1.1rem; font-weight: 800; }
+.gift-modal-close {
+  border: none; background: none; font-size: 1.5rem; cursor: pointer;
+  color: var(--gray);
+}
+.gift-modal-body { padding: 1.5rem; }
+.gift-section { margin-bottom: 1.5rem; }
+.gift-section-title {
+  font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--gray); margin-bottom: 0.8rem;
+}
+.gift-item {
+  display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem;
+  background: var(--cream); border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer;
+  transition: all 0.2s;
+}
+.gift-item:hover { background: var(--orange-bg); }
+.gift-item-icon { font-size: 1.4rem; }
+.gift-item-text { flex: 1; }
+.gift-item-name { font-size: 0.9rem; font-weight: 600; }
+.gift-item-sub { font-size: 0.75rem; color: var(--gray); }
+.gift-item-countdown {
+  font-size: 0.75rem; font-weight: 700; color: var(--orange);
+}
+.birthday-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.birthday-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.7rem 0.9rem; background: var(--cream); border-radius: 8px;
+}
+.birthday-left { display: flex; align-items: center; gap: 0.7rem; }
+.birthday-avatar {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--orange);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem;
+}
+.birthday-name { font-size: 0.9rem; font-weight: 600; }
+.birthday-date { font-size: 0.75rem; color: var(--gray); }
+.birthday-actions { display: flex; align-items: center; gap: 0.4rem; }
+.birthday-delete {
+  border: none; background: none; color: var(--red); cursor: pointer;
+  font-size: 1rem; opacity: 0.6; transition: opacity 0.2s;
+}
+.birthday-delete:hover { opacity: 1; }
+.add-birthday-form {
+  display: grid; grid-template-columns: 1fr 1fr auto; gap: 0.5rem; margin-top: 0.8rem;
+}
+.add-birthday-form input {
+  padding: 0.5rem 0.7rem; border: 1px solid var(--border); border-radius: 6px;
+  font-family: inherit; font-size: 0.85rem;
+}
+.add-birthday-form button {
+  background: var(--orange); color: white; border: none; padding: 0.5rem 1rem;
+  border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
+}
+.gift-badge {
+  display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.6rem;
+  background: var(--red-light); color: var(--red); border-radius: 2rem;
+  font-size: 0.68rem; font-weight: 700;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px) {
+  .three-col { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media(max-width:680px) {
+  .three-col { grid-template-columns: 1fr; }
+  nav { gap: 0.8rem; }
+  .nav-search { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .for-someone-inner { gap: 1rem; }
+  .add-birthday-form { grid-template-columns: 1fr; }
+}
+
+/* ── HOLD OVERLAY ── */
+.hold-overlay {
+  position: fixed; inset: 0; z-index: 10001; pointer-events: none;
+  display: none; align-items: center; justify-content: center;
+}
+.hold-overlay.active { display: flex; }
+.hold-ring {
+  position: relative; width: 100px; height: 100px;
+}
+.hold-ring svg { transform: rotate(-90deg); width: 100px; height: 100px; }
+.hold-ring-bg { fill: none; stroke: rgba(0,0,0,0.08); stroke-width: 4; }
+.hold-ring-fill { fill: none; stroke: var(--orange); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 283; stroke-dashoffset: 283; transition: stroke-dashoffset 0.1s linear; }
+.hold-ring-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+
+/* ── HISTORY MODAL ── */
+.history-modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 10002;
+  display: none; align-items: center; justify-content: center; padding: 1rem;
+}
+.history-modal.open { display: flex; }
+.history-modal-content {
+  background: var(--white); border-radius: 14px; max-width: 520px; width: 100%;
+  max-height: 85vh; overflow-y: auto; animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.history-modal-header {
+  padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--cream); border-radius: 14px 14px 0 0;
+}
+.history-modal-header h3 { font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
+.history-modal-close { border: none; background: none; font-size: 1.5rem; cursor: pointer; color: var(--gray); }
+.history-modal-body { padding: 1.5rem; }
+.history-icon-circle {
+  width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; margin: 0 auto 1rem;
+}
+.history-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1.2rem; }
+.history-stat {
+  background: var(--cream); border-radius: 10px; padding: 1rem; text-align: center;
+}
+.history-stat-val { font-size: 1.3rem; font-weight: 800; color: var(--black); }
+.history-stat-lbl { font-size: 0.68rem; color: var(--gray); margin-top: 0.2rem; }
+.history-timeline { margin-top: 1.2rem; }
+.history-timeline h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); margin-bottom: 0.8rem; }
+.history-tl-item { display: flex; gap: 0.8rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; align-items: flex-start; }
+.history-tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); margin-top: 0.35rem; flex-shrink: 0; }
+.history-tl-date { font-size: 0.7rem; color: var(--gray); white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!-- UTIL BAR -->
+<div class="util-bar">🌿 Every kit comes with step-by-step guides + an AI Skill Assistant to grow with you. <a href="#">See what's inside →</a></div>
+
+<!-- NAV (Etsy-style) -->
+<nav>
+  <div class="nav-left-group">
+    <div class="nav-logo">HobbyDIYnSkill</div>
+  </div>
+  <div class="nav-ai-forum">
+    <a class="nav-sell-btn" href="#">🤖<br>AI</a>
+    <a class="nav-sell-btn" href="#">💬<br>Forum</a>
+  </div>
+  <div class="nav-search">
+    <select>
+      <option>All categories</option>
+      <option>Kits</option>
+      <option>Creations</option>
+      <option>Courses</option>
+      <option>Camps</option>
+    </select>
+    <input type="text" placeholder="Search for kits, creations, courses...">
+    <button class="stash-icon-btn" title="Fit My Stash — filter by your inventory">🎒</button>
+    <button>🔍</button>
+  </div>
+  <div class="nav-actions">
+    <a class="nav-sell-btn" href="#">🔖<br>Saved</a>
+    <a class="nav-sell-btn" href="#">🗄️<br>My Stash</a>
+    <a class="nav-sell-btn" href="#">🛒<br>Cart</a>
+    <button class="nav-signin" id="signInBtn">Sign in</button>
+    <button class="nav-register">Register</button>
+  </div>
+</nav>
+
+<!-- CATEGORY TABS -->
+<div class="cat-bar">
+  <a class="cat-tab active" href="#">🏠 Home</a>
+  <a class="cat-tab gift-tab" href="#" id="giftTab">🎁 Gifts</a>
+  <a class="cat-tab" href="#">🧵 Fiber Arts</a>
+  <a class="cat-tab" href="#">🪵 Woodworking</a>
+  <a class="cat-tab" href="#">🎨 Miniatures</a>
+  <a class="cat-tab" href="mixology.html">🍸 Mixology</a>
+  <a class="cat-tab" href="#">🎩 Magic</a>
+  <a class="cat-tab" href="#">🏺 Ceramics</a>
+  <a class="cat-tab" href="#">💡 Electronics</a>
+  <a class="cat-tab" href="#">🌿 Botanicals</a>
+  <a class="cat-tab" href="#">🃏 Collecting</a>
+  <a class="cat-tab" href="#">🍷 Wine & Spirits</a>
+  <a class="cat-tab" href="#">🎓 All Camps</a>
+  <a class="cat-tab" href="#">⚡ On Sale</a>
+</div>
+
+<!-- FOR-SOMEONE STRIP (replaces hero) -->
+<div class="for-someone-strip">
+  <div class="for-someone-inner">
+
+    <!-- Age Group -->
+    <div class="for-group">
+      <div class="for-label">🎂 Age</div>
+      <div class="for-pills">
+        <button class="for-pill active">All Ages</button>
+        <button class="for-pill">🧒 Kids 6–12</button>
+        <button class="for-pill">🧑 Teens 13–17</button>
+        <button class="for-pill">🙋 Adults</button>
+        <button class="for-pill">👴 Seniors</button>
+      </div>
+    </div>
+
+    <div class="for-divider"></div>
+
+    <!-- For Her / Him -->
+    <div class="for-group">
+      <div class="for-label">🎯 For</div>
+      <div class="for-pills">
+        <button class="for-pill active">Everyone</button>
+        <button class="for-pill pink">👧 For Her</button>
+        <button class="for-pill blue">👦 For Him</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- THREE COLUMN MAIN GRID -->
+<div class="main-content" id="kits">
+
+  <div class="three-col">
+
+    <!-- COL 1: KITS -->
+    <div>
+      <div class="col-header">
+        <div class="col-header-icon">📦</div>
+        <div class="col-header-text">
+          <h3>Kits & Tools</h3>
+          <p>Curated for all skill levels. <a href="#">See all kits →</a></p>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#f0ead6,#e5d9c0);">
+          🧵
+          <span class="listing-badge badge-kit">Kit • Beginner</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">HobbyDIYnSkill Originals</div>
+          <div class="listing-name">Artisan Embroidery Starter — Hoops, Threads & 3 Patterns</div>
+          <div class="listing-stars">★★★★★ <span>(1,204)</span></div>
+          <div class="listing-price">$39 <span class="listing-price-sub">+ AI Assistant included</span></div>
+          <div class="listing-tags"><span class="listing-tag">Beginner</span><span class="listing-tag">Embroidery</span><span class="listing-tag">AI Included</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#ebe4d4,#d6c9b4);">
+          🪵
+          <span class="listing-badge badge-kit">Kit • Intermediate</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">HobbyDIYnSkill Originals</div>
+          <div class="listing-name">Hardwood Carving Toolkit — Japanese Chisels + Basswood Blocks</div>
+          <div class="listing-stars">★★★★★ <span>(872)</span></div>
+          <div class="listing-price">$79 <span class="listing-price-sub">+ AI project generator</span></div>
+          <div class="listing-tags"><span class="listing-tag">Intermediate</span><span class="listing-tag">Woodworking</span><span class="listing-tag">AI Included</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#1a0d00,#2d1a00);">
+          🍸
+          <span class="listing-badge badge-kit">Kit • Pro</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">HobbyDIYnSkill Originals</div>
+          <div class="listing-name">Molecular Mixology Crate — Smoking Gun, Spherification Kit</div>
+          <div class="listing-stars">★★★★☆ <span>(631)</span></div>
+          <div class="listing-price">$109 <span class="listing-price-sub">+ AI cocktail generator</span></div>
+          <div class="listing-tags"><span class="listing-tag">Pro</span><span class="listing-tag">Mixology</span><span class="listing-tag">AI Included</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#ebe0d4,#d4c0b0);">
+          🧶
+          <span class="listing-badge badge-kit">Kit • Beginner</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">HobbyDIYnSkill Originals</div>
+          <div class="listing-name">Artisan Leathercraft Starter — Veg-Tan, Tools & Wallet Pattern</div>
+          <div class="listing-stars">★★★★★ <span>(488)</span></div>
+          <div class="listing-price">$55 <span class="listing-price-sub">+ Etsy template pack</span></div>
+          <div class="listing-tags"><span class="listing-tag">Beginner</span><span class="listing-tag">Leathercraft</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL 2: CREATIONS -->
+    <div id="creations">
+      <div class="col-header">
+        <div class="col-header-icon">🛠</div>
+        <div class="col-header-text">
+          <h3>Creations by Makers</h3>
+          <p>Made by our community. <a href="#">Sell yours →</a></p>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#f7f0e8,#ede0cc);">
+          🪡
+          <span class="listing-badge badge-creation">Creation</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">by sarah_makes_co</div>
+          <div class="listing-name">Hand-Embroidered Wildflower Hoop Art — 8 inch, custom colors available</div>
+          <div class="listing-stars">★★★★★ <span>(342)</span></div>
+          <div class="listing-price">$48</div>
+          <div class="listing-tags"><span class="listing-tag">Embroidery</span><span class="listing-tag">Wall Art</span><span class="listing-tag">Custom</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#e8d8c4,#d4c0a8);">
+          👜
+          <span class="listing-badge badge-creation">Creation</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">by oakhide_studio</div>
+          <div class="listing-name">Hand-Stitched Leather Bifold Wallet — Full-grain, Personalized</div>
+          <div class="listing-stars">★★★★★ <span>(215)</span></div>
+          <div class="listing-price">$85</div>
+          <div class="listing-tags"><span class="listing-tag">Leathercraft</span><span class="listing-tag">Wallet</span><span class="listing-tag">Personalized</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#1e1a2e,#2a2040);">
+          ⚔️
+          <span class="listing-badge badge-creation">Creation</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">by ink_and_blade_miniatures</div>
+          <div class="listing-name">Painted Warhammer Space Marine — NMM Gold, Display Quality</div>
+          <div class="listing-stars">★★★★★ <span>(98)</span></div>
+          <div class="listing-price">$130</div>
+          <div class="listing-tags"><span class="listing-tag">Miniatures</span><span class="listing-tag">Commission</span><span class="listing-tag">Display</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#e8f0e4,#d4e4cc);">
+          🏺
+          <span class="listing-badge badge-creation">Creation</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">by wheel_and_fire</div>
+          <div class="listing-name">Hand-thrown Stoneware Mug Set (4) — Matte glaze, food safe</div>
+          <div class="listing-stars">★★★★☆ <span>(167)</span></div>
+          <div class="listing-price">$110</div>
+          <div class="listing-tags"><span class="listing-tag">Ceramics</span><span class="listing-tag">Kitchenware</span><span class="listing-tag">Set</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL 3: COURSES & CAMPS -->
+    <div id="camps">
+      <div class="col-header">
+        <div class="col-header-icon">🎓</div>
+        <div class="col-header-text">
+          <h3>Camps & Courses</h3>
+          <p>Go pro faster. <a href="#">Browse all →</a></p>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#1a2a1a,#0d1a0d);">
+          🏕️
+          <span class="listing-badge badge-camp">Camp • Live</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">by HobbyDIYnSkill Academy</div>
+          <div class="listing-name">Weekend Mixologist: Land Your First $500 Private Event</div>
+          <div class="listing-stars">★★★★★ <span>(204)</span></div>
+          <div class="listing-price">$249 <span class="listing-price-sub">June 7–8 • Only 4 spots left</span></div>
+          <div class="listing-tags"><span class="listing-tag">Mixology</span><span class="listing-tag">Virtual Camp</span><span class="listing-tag">Earn</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#fff0e8,#fde0cc);">
+          💻
+          <span class="listing-badge badge-course">Course • On-Demand</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">by HobbyDIYnSkill Academy</div>
+          <div class="listing-name">Etsy Empire: Sell Your Handcraft at Scale — 6 Module Course</div>
+          <div class="listing-stars">★★★★★ <span>(1,892)</span></div>
+          <div class="listing-price">$129 <span class="listing-price-sub">Instant access + Discord</span></div>
+          <div class="listing-tags"><span class="listing-tag">All Hobbies</span><span class="listing-tag">Business</span><span class="listing-tag">Etsy</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#1a1a2e,#12122a);">
+          🎩
+          <span class="listing-badge badge-camp">Camp • Live</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">by HobbyDIYnSkill Academy</div>
+          <div class="listing-name">From Zero to First Paid Show: Magic Performer Bootcamp</div>
+          <div class="listing-stars">★★★★★ <span>(88)</span></div>
+          <div class="listing-price">$199 <span class="listing-price-sub">June 14–15 • 7 spots left</span></div>
+          <div class="listing-tags"><span class="listing-tag">Magic</span><span class="listing-tag">Virtual Camp</span><span class="listing-tag">Performance</span></div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-img" style="background:linear-gradient(135deg,#e8f4e8,#d4e8d4);">
+          🏕️
+          <span class="listing-badge badge-camp">Kids Camp</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-seller">by HobbyDIYnSkill Academy</div>
+          <div class="listing-name">STEM Maker Summer Camp (Ages 10–16) — Hardware Kit Shipped</div>
+          <div class="listing-stars">★★★★★ <span>(433)</span></div>
+          <div class="listing-price">$699 <span class="listing-price-sub">July 14–18 • All materials included</span></div>
+          <div class="listing-tags"><span class="listing-tag">Kids</span><span class="listing-tag">STEM</span><span class="listing-tag">Summer Camp</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /three-col -->
+</div><!-- /main-content -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">HobbyDIYnSkill</div>
+      <p>The human-safe skills marketplace. Learn, create, sell, and master physical crafts that AI cannot replace. Powered by real labor market intelligence.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#">All Kits</a>
+      <a href="#">Beginner Kits</a>
+      <a href="#">Pro Kits</a>
+      <a href="#">Gift Cards</a>
+    </div>
+    <div class="footer-col">
+      <h4>Sell</h4>
+      <a href="#">Sell a Creation</a>
+      <a href="#">Sell a Course</a>
+      <a href="#">Host a Camp</a>
+      <a href="#">Seller Guide</a>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <a href="#">Camps Calendar</a>
+      <a href="#">On-Demand Courses</a>
+      <a href="#">Kids Summer Camp</a>
+      <a href="#">AI Skill Assistant</a>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <a href="#">Our Story</a>
+      <a href="#">Maker Community</a>
+      <a href="#">Career Intelligence</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 HobbyDIYnSkill. All rights reserved.</p>
+    <a href="#" class="footer-hub">↗ Powered by JobForesight AI Career Intelligence</a>
+  </div>
+</footer>
+
+<!-- GIFT MODAL -->
+<div class="gift-modal" id="giftModal">
+  <div class="gift-modal-content">
+    <div class="gift-modal-header">
+      <h3 id="giftModalTitle">🎁 Gift Ideas</h3>
+      <button class="gift-modal-close" id="giftModalClose">&times;</button>
+    </div>
+    <div class="gift-modal-body" id="giftModalBody">
+      <!-- Content will be dynamically generated -->
+    </div>
+  </div>
+</div>
+
+<!-- HOLD OVERLAY -->
+<div class="hold-overlay" id="holdOverlay">
+  <div class="hold-ring">
+    <svg viewBox="0 0 100 100">
+      <circle class="hold-ring-bg" cx="50" cy="50" r="45"/>
+      <circle class="hold-ring-fill" id="holdRingFill" cx="50" cy="50" r="45"/>
+    </svg>
+    <div class="hold-ring-icon" id="holdRingIcon">🎯</div>
+  </div>
+</div>
+
+<!-- HISTORY MODAL -->
+<div class="history-modal" id="historyModal">
+  <div class="history-modal-content">
+    <div class="history-modal-header">
+      <h3 id="historyModalTitle">📜 Hobby History</h3>
+      <button class="history-modal-close" id="historyModalClose">&times;</button>
+    </div>
+    <div class="history-modal-body" id="historyModalBody"></div>
+  </div>
+</div>
+
+<script>
+  // === DATA ===
+  const HOLIDAYS = [
+    { name: "Christmas", month: 12, day: 25, emoji: "🎄", color: "#165D37" },
+    { name: "Valentine's Day", month: 2, day: 14, emoji: "❤️", color: "#BE123C" },
+    { name: "Mother's Day", month: 5, week: 2, weekday: 0, emoji: "💐", color: "#DB2777" },
+    { name: "Father's Day", month: 6, week: 3, weekday: 0, emoji: "👔", color: "#1E40AF" },
+    { name: "Thanksgiving", month: 11, week: 4, weekday: 4, emoji: "🦃", color: "#92400E" },
+    { name: "New Year", month: 1, day: 1, emoji: "🎆", color: "#EA580C" },
+    { name: "Halloween", month: 10, day: 31, emoji: "🎃", color: "#EA580C" },
+    { name: "Easter", month: 4, day: 21, emoji: "🐰", color: "#16A34A" },
+  ];
+
+  const WEEKEND_GIFTS = [
+    { name: "Weekend BBQ Kit", emoji: "🍖", desc: "Grilling tools & spices for perfect weekend BBQ" },
+    { name: "Game Night Bundle", emoji: "🎲", desc: "Board games & snacks for fun with friends" },
+    { name: "DIY Spa Kit", emoji: "🧴", desc: "Relaxation essentials for lazy Sunday" },
+    { name: "Camping Starter Pack", emoji: "⛺", desc: "Get away for the weekend" }
+  ];
+
+  const GIFT_IDEAS = {
+    birthday: [
+      { name: "Custom Embroidery Hoop", emoji: "🪡", desc: "Personalized with their name or favorite design" },
+      { name: "Handcrafted Leather Wallet", emoji: "👜", desc: "Timeless and personalized" },
+      { name: "Miniature Painting Commission", emoji: "⚔️", desc: "For the tabletop gamer in your life" }
+    ],
+    christmas: [
+      { name: "Festive Wreath Making Kit", emoji: "🎄", desc: "Create your own holiday decor" },
+      { name: "Hot Chocolate & Spices Set", emoji: "☕", desc: "Cozy winter essentials" }
+    ],
+    valentine: [
+      { name: "Couples Pottery Class", emoji: "🏺", desc: "Make memories (and mugs) together" },
+      { name: "Custom Love Letter Embroidery", emoji: "💌", desc: "Stitch your story" }
+    ],
+    weekend: WEEKEND_GIFTS
+  };
+
+  // === STATE ===
+  let birthdays = JSON.parse(localStorage.getItem('hobbydiy_birthdays') || '[]');
+  let isLoggedIn = !!localStorage.getItem('hobbydiy_loggedIn');
+
+  // === DATE UTILITIES ===
+  function getNextHoliday() {
+    const today = new Date();
+    let nextHoliday = null;
+    let minDays = Infinity;
+
+    HOLIDAYS.forEach(holiday => {
+      let holidayDate;
+      if (holiday.day) {
+        holidayDate = new Date(today.getFullYear(), holiday.month - 1, holiday.day);
+      } else {
+        const firstDay = new Date(today.getFullYear(), holiday.month - 1, 1);
+        const daysToAdd = (holiday.weekday - firstDay.getDay() + 7) % 7;
+        holidayDate = new Date(firstDay);
+        holidayDate.setDate(holidayDate.getDate() + daysToAdd + (holiday.week - 1) * 7);
+      }
+
+      if (holidayDate < today) {
+        holidayDate = new Date(holidayDate);
+        holidayDate.setFullYear(holidayDate.getFullYear() + 1);
+      }
+
+      const daysUntil = Math.ceil((holidayDate - today) / (1000 * 60 * 60 * 24));
+      if (daysUntil >= 0 && daysUntil < minDays) {
+        minDays = daysUntil;
+        nextHoliday = { ...holiday, date: holidayDate, daysUntil };
+      }
+    });
+
+    return nextHoliday;
+  }
+
+  function isWeekendApproaching() {
+    const today = new Date();
+    const day = today.getDay();
+    return day >= 4 && day <= 6;
+  }
+
+  function getUpcomingBirthdays() {
+    const today = new Date();
+    return birthdays
+      .map(b => {
+        const bdayDate = new Date(b.date);
+        let thisYearBday = new Date(today.getFullYear(), bdayDate.getMonth(), bdayDate.getDate());
+        if (thisYearBday < today) {
+          thisYearBday = new Date(today.getFullYear() + 1, bdayDate.getMonth(), bdayDate.getDate());
+        }
+        const daysUntil = Math.ceil((thisYearBday - today) / (1000 * 60 * 60 * 24));
+        return { ...b, dateObj: thisYearBday, daysUntil };
+      })
+      .filter(b => b.daysUntil > 0 && b.daysUntil <= 30)
+      .sort((a, b) => a.daysUntil - b.daysUntil);
+  }
+
+  function formatDaysUntil(days) {
+    if (days === 0) return 'Today';
+    if (days === 1) return 'One Day Left';
+    return `${days} days left`;
+  }
+
+  // === UI ===
+  function updateGiftTab() {
+    const giftTab = document.getElementById('giftTab');
+    const giftBadge = document.getElementById('giftBadge');
+    const nextHoliday = getNextHoliday();
+    const upcomingBirthdays = getUpcomingBirthdays();
+    const isWeekend = isWeekendApproaching();
+
+    let count = 0;
+    if (nextHoliday && nextHoliday.daysUntil <= 30) count++;
+    if (upcomingBirthdays.length > 0) count += upcomingBirthdays.length;
+    if (isWeekend) count++;
+
+    let tabText = "🎁 Gifts";
+    if (nextHoliday && nextHoliday.daysUntil <= 30) {
+      tabText = `Gifts · ${nextHoliday.emoji} ${nextHoliday.name} ${formatDaysUntil(nextHoliday.daysUntil)}`;
+    } else if (upcomingBirthdays.length > 0) {
+      tabText = "🎂 Birthday Gifts";
+    } else if (isWeekend) {
+      tabText = "🎉 Weekend Gifts";
+    }
+
+    if (giftTab) {
+      giftTab.textContent = tabText;
+    }
+
+    if (giftBadge) {
+      if (count > 0) {
+        giftBadge.textContent = count;
+        giftBadge.style.display = 'inline-flex';
+      } else {
+        giftBadge.style.display = 'none';
+      }
+    }
+  }
+
+  function renderGiftModal() {
+    const modalBody = document.getElementById('giftModalBody');
+    const nextHoliday = getNextHoliday();
+    const upcomingBirthdays = getUpcomingBirthdays();
+    const isWeekend = isWeekendApproaching();
+
+    let html = '';
+
+    if (isLoggedIn) {
+      html += `
+        <div class="gift-section">
+          <div class="gift-section-title">🎂 Birthdays Coming Up</div>
+          ${upcomingBirthdays.length === 0 ? '<p style="color:var(--gray);font-size:0.85rem;">No birthdays in the next 30 days.</p>' : ''}
+          <div class="birthday-list">
+            ${upcomingBirthdays.map((b, idx) => `
+              <div class="gift-item" onclick="openGiftCategory('birthday', '${b.name}')">
+                <div class="gift-item-icon">${b.avatar || '🎂'}</div>
+                <div class="gift-item-text">
+                  <div class="gift-item-name">${b.name}</div>
+                  <div class="gift-item-sub">${b.dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</div>
+                </div>
+                <div class="gift-item-countdown">${formatDaysUntil(b.daysUntil)}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="add-birthday-form">
+            <input type="text" id="newBirthdayName" placeholder="Name">
+            <input type="date" id="newBirthdayDate">
+            <button onclick="addBirthday()">Add</button>
+          </div>
+        </div>
+      `;
+    }
+
+    if (nextHoliday && nextHoliday.daysUntil <= 30) {
+      const holidayKey = nextHoliday.name.toLowerCase().replace(/[^a-z]/g, '');
+      const ideas = GIFT_IDEAS[holidayKey] || GIFT_IDEAS.weekend;
+      html += `
+        <div class="gift-section">
+          <div class="gift-section-title">${nextHoliday.emoji} ${nextHoliday.name} — ${formatDaysUntil(nextHoliday.daysUntil)}</div>
+          ${ideas.map(g => `
+            <div class="gift-item">
+              <div class="gift-item-icon">${g.emoji}</div>
+              <div class="gift-item-text">
+                <div class="gift-item-name">${g.name}</div>
+                <div class="gift-item-sub">${g.desc}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    if (isWeekend) {
+      html += `
+        <div class="gift-section">
+          <div class="gift-section-title">🎉 Weekend Gift Ideas</div>
+          ${WEEKEND_GIFTS.map(g => `
+            <div class="gift-item">
+              <div class="gift-item-icon">${g.emoji}</div>
+              <div class="gift-item-text">
+                <div class="gift-item-name">${g.name}</div>
+                <div class="gift-item-sub">${g.desc}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    html += `
+      <div class="gift-section">
+        <div class="gift-section-title">💝 Explore All Gift Ideas</div>
+        <div class="gift-item"><div class="gift-item-icon">👩‍🎨</div><div class="gift-item-text"><div class="gift-item-name">For the Creative</div><div class="gift-item-sub">Art & craft supplies</div></div></div>
+        <div class="gift-item"><div class="gift-item-icon">🍳</div><div class="gift-item-text"><div class="gift-item-name">For the Foodie</div><div class="gift-item-sub">Kitchen tools & recipes</div></div></div>
+        <div class="gift-item"><div class="gift-item-icon">🧘</div><div class="gift-item-text"><div class="gift-item-name">For Relaxation</div><div class="gift-item-sub">Calm & wellness kits</div></div></div>
+      </div>
+    `;
+
+    modalBody.innerHTML = html;
+  }
+
+  // === ACTIONS ===
+  function openGiftModal() {
+    document.getElementById('giftModal').classList.add('open');
+    renderGiftModal();
+  }
+
+  function closeGiftModal() {
+    document.getElementById('giftModal').classList.remove('open');
+  }
+
+  function addBirthday() {
+    const nameInput = document.getElementById('newBirthdayName');
+    const dateInput = document.getElementById('newBirthdayDate');
+    if (!nameInput.value || !dateInput.value) return;
+
+    birthdays.push({
+      name: nameInput.value,
+      date: dateInput.value,
+      avatar: nameInput.value[0].toUpperCase()
+    });
+    localStorage.setItem('hobbydiy_birthdays', JSON.stringify(birthdays));
+    nameInput.value = '';
+    dateInput.value = '';
+    updateGiftTab();
+    renderGiftModal();
+  }
+
+  function toggleLogin() {
+    isLoggedIn = !isLoggedIn;
+    if (isLoggedIn) {
+      localStorage.setItem('hobbydiy_loggedIn', 'true');
+      document.getElementById('signInBtn').textContent = 'Account';
+    } else {
+      localStorage.removeItem('hobbydiy_loggedIn');
+      document.getElementById('signInBtn').textContent = 'Sign in';
+    }
+    updateGiftTab();
+  }
+
+  function openGiftCategory(category, name) {
+    alert(`Opening ${name ? name + '\'s ' : ''}${category} gifts!`);
+    closeGiftModal();
+  }
+
+  // === INIT ===
+  document.addEventListener('DOMContentLoaded', () => {
+    if (isLoggedIn) {
+      const signInBtn = document.getElementById('signInBtn');
+      if (signInBtn) signInBtn.textContent = 'Account';
+    }
+
+    const giftModalClose = document.getElementById('giftModalClose');
+    if (giftModalClose) giftModalClose.addEventListener('click', closeGiftModal);
+
+    const giftModal = document.getElementById('giftModal');
+    if (giftModal) {
+      giftModal.addEventListener('click', (e) => {
+        if (e.target === giftModal) closeGiftModal();
+      });
+    }
+
+    const signInBtn = document.getElementById('signInBtn');
+    if (signInBtn) signInBtn.addEventListener('click', toggleLogin);
+
+    updateGiftTab();
+    setInterval(updateGiftTab, 60 * 60 * 1000);
+  });
+
+  // For-pill toggle (age group)
+  document.querySelectorAll('.for-pills').forEach(group => {
+    group.querySelectorAll('.for-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        group.querySelectorAll('.for-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+  });
+
+  // Category tab highlight
+  document.querySelectorAll('.cat-tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  /* ═══════════════════════════════════
+     HOLD-TO-REVEAL HISTORY FEATURE
+     ═══════════════════════════════════ */
+  const HOLD_DURATION = 2000;
+  let holdTimer = null;
+  let holdStartTime = 0;
+  let holdTarget = null;
+  let holdActive = false;
+  const CIRCUMFERENCE = 2 * Math.PI * 45;
+
+  function attachHoldListeners() {
+    document.querySelectorAll('.listing-card, .cat-tab, .for-pill').forEach(el => {
+      if (el.dataset.holdBound) return;
+      el.dataset.holdBound = '1';
+      el.addEventListener('mousedown', holdStart);
+      el.addEventListener('touchstart', holdStart, {passive: false});
+      el.addEventListener('mouseup', holdEnd);
+      el.addEventListener('mouseleave', holdEnd);
+      el.addEventListener('touchend', holdEnd);
+      el.addEventListener('touchcancel', holdEnd);
+    });
+  }
+
+  function holdStart(e) {
+    if (e.type === 'touchstart') e.preventDefault();
+    holdTarget = e.currentTarget;
+    holdStartTime = Date.now();
+    holdActive = true;
+    const emoji = holdTarget.dataset.emoji || '🎯';
+    const overlay = document.getElementById('holdOverlay');
+    const ringFill = document.getElementById('holdRingFill');
+    const ringIcon = document.getElementById('holdRingIcon');
+    ringIcon.textContent = emoji;
+    ringFill.style.strokeDashoffset = CIRCUMFERENCE;
+    overlay.classList.add('active');
+    holdTimer = setInterval(() => {
+      const elapsed = Date.now() - holdStartTime;
+      const progress = Math.min(elapsed / HOLD_DURATION, 1);
+      ringFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+      if (progress >= 1) {
+        clearInterval(holdTimer);
+        holdComplete();
+      }
+    }, 50);
+  }
+
+  function holdEnd() {
+    clearInterval(holdTimer);
+    holdActive = false;
+    holdTarget = null;
+    document.getElementById('holdOverlay').classList.remove('active');
+  }
+
+  function holdComplete() {
+    holdActive = false;
+    document.getElementById('holdOverlay').classList.remove('active');
+    if (!holdTarget) return;
+    const nameEl = holdTarget.querySelector('.listing-name') || holdTarget.querySelector('.cat-tab') || holdTarget;
+    const name = holdTarget.dataset.hobby || (nameEl ? nameEl.textContent.trim() : holdTarget.textContent.trim());
+    const emoji = holdTarget.dataset.emoji || '🎯';
+    showHistory(name, emoji);
+  }
+
+  function showHistory(name, emoji) {
+    const title = document.getElementById('historyModalTitle');
+    const body = document.getElementById('historyModalBody');
+    title.innerHTML = '📜 ' + emoji + ' ' + name + ' — Your Journey';
+
+    const startDate = new Date(2022, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
+    const projects = Math.floor(Math.random() * 60) + 10;
+    const hours = Math.floor(Math.random() * 500) + 50;
+    const level = ['Beginner', 'Intermediate', 'Advanced', 'Master'][Math.floor(Math.random() * 4)];
+
+    body.innerHTML = `
+      <div class="history-icon-circle" style="background:var(--orange-bg);">${emoji}</div>
+      <p style="text-align:center;color:var(--gray);font-size:0.85rem;">Here's a snapshot of your journey with <strong>${name}</strong>.</p>
+      <div class="history-stat-grid">
+        <div class="history-stat">
+          <div class="history-stat-val">${startDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div>
+          <div class="history-stat-lbl">Since</div>
+        </div>
+        <div class="history-stat">
+          <div class="history-stat-val">${projects}</div>
+          <div class="history-stat-lbl">Projects Done</div>
+        </div>
+        <div class="history-stat">
+          <div class="history-stat-val">${hours}h</div>
+          <div class="history-stat-lbl">Time Invested</div>
+        </div>
+        <div class="history-stat">
+          <div class="history-stat-val">${level}</div>
+          <div class="history-stat-lbl">Skill Level</div>
+        </div>
+      </div>
+      <div class="history-timeline">
+        <h4>🕐 Recent Milestones</h4>
+        <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>First attempt</strong> — ${startDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div></div>
+        <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>Completed 10th project</strong> — ${new Date(startDate.getTime() + 1000 * 60 * 60 * 24 * 90).toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div></div>
+        <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>Reached ${level} level</strong> — placeholder milestone</div></div>
+      </div>
+      <p style="text-align:center;margin-top:1rem;font-size:0.72rem;color:var(--gray);">✨ More detailed history coming soon — this is a placeholder</p>
+    `;
+    document.getElementById('historyModal').classList.add('open');
+  }
+
+  document.getElementById('historyModalClose').addEventListener('click', () => {
+    document.getElementById('historyModal').classList.remove('open');
+  });
+  document.getElementById('historyModal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('historyModal')) document.getElementById('historyModal').classList.remove('open');
+  });
+
+  attachHoldListeners();
+</script>
+</body>
+</html>
