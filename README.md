@@ -24,11 +24,11 @@ git clone <repository-url>
 cd HobbyHub
 
 # 方式1: 使用浏览器直接打开
-open hobbydiy.html
+open index.html
 
 # 方式2: 使用本地服务器（推荐）
 python -m http.server 8000
-# 然后访问 http://localhost:8000/hobbydiy.html
+# 然后访问 http://localhost:8000/
 ```
 
 ---
@@ -53,12 +53,30 @@ python -m http.server 8000
 
 ---
 
+## 📁 项目结构
+
+```
+HobbyHub/
+├── index.html                 ← 主页（原 hobbydiy.html）
+├── hobbies/
+│   └── mixology/
+│       └── mixology.html      ← 调酒专题页
+├── assets/
+│   └── images/
+│       └── Negroni.jpg
+├── docs/
+│   └── 项目架构与商品详情页设计.md
+└── README.md
+```
+
+> 随着更多 hobby 加入，各 hobby 页面将放入 `hobbies/<name>/` 目录，图片归入 `assets/images/<name>/`。
+
 ## 📁 模块列表
 
 | 文件 | 模块名称 | 说明 |
 |------|---------|------|
-| `hobbydiy.html` | 主页面 | 首页展示、导航、工具套件、作品、课程三大板块 |
-| `mixology.html` | 调酒专题 | 鸡尾酒配方展示、筛选、详情查看 |
+| `index.html` | 主页面 | 首页展示、导航、工具套件、作品、课程三大板块 |
+| `hobbies/mixology/mixology.html` | 调酒专题 | 鸡尾酒配方展示、筛选、详情查看 |
 
 ---
 
@@ -67,7 +85,7 @@ python -m http.server 8000
 ### ✅ 已实现功能
 
 **1. 探索调酒配方**
-- 点击导航栏的「🍸 Mixology」或直接访问 `mixology.html`
+- 点击导航栏的「🍸 Mixology」或直接访问 `hobbies/mixology/mixology.html`
 - 使用筛选标签（经典、热带、烈酒、起泡酒、现代）过滤配方
 - **长按卡片**触发 Hold-to-Reveal 效果，查看模拟的技能学习历程
 
@@ -85,7 +103,7 @@ python -m http.server 8000
 ### 🟡 仅展示功能（无交互）
 
 **浏览工具套件**
-- 打开 `hobbydiy.html`
+- 打开 `index.html`
 - 查看三大板块：工具套件、社区作品、课程训练营
 - 卡片仅展示静态数据，点击无详情页
 
