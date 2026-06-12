@@ -76,10 +76,10 @@ body::before {
 
 /* ── NAV (frosted glass) ── */
 nav {
-  background: rgba(14, 12, 18, 0.55);
+  background: rgba(14, 12, 18, 0.88);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   position: sticky; top: 0; z-index: 999;
   padding: 0 2rem; height: 68px;
   display: grid;
@@ -95,9 +95,9 @@ nav {
 .nav-search {
   width: 100%; max-width: 800px; justify-self: center;
   display: flex; align-items: center;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-full); overflow: hidden;
   transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
 }
@@ -167,10 +167,10 @@ nav {
 
 /* ── CATEGORY TABS (glass) ── */
 .cat-bar {
-  background: rgba(14, 12, 18, 0.40);
+  background: rgba(14, 12, 18, 0.78);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   padding: 0 2rem; display: flex; gap: 0; overflow-x: auto;
   scrollbar-width: none; position: sticky; top: 68px; z-index: 998;
 }
@@ -348,9 +348,11 @@ footer {
   transition: all 0.25s; white-space: nowrap; font-family: inherit;
 }
 .for-pill:hover { border-color: var(--accent); color: var(--accent); }
-.for-pill.active { border-color: var(--accent); background: rgba(241,100,30,0.18); color: #ffb088; box-shadow: 0 0 20px rgba(241,100,30,0.12); }
-.for-pill.pink:hover, .for-pill.pink.active { border-color: #e91e8c; background: rgba(233,30,140,0.18); color: #f490c2; box-shadow: 0 0 20px rgba(233,30,140,0.12); }
-.for-pill.blue:hover, .for-pill.blue.active { border-color: #4ea0e8; background: rgba(78,160,232,0.18); color: #95cdf0; box-shadow: 0 0 20px rgba(78,160,232,0.12); }
+.for-pill.active { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 18px rgba(241,100,30,0.30); }
+.for-pill.pink.active { border-color: #e91e8c; background: #e91e8c; color: #fff; box-shadow: 0 0 18px rgba(233,30,140,0.30); }
+.for-pill.pink:hover { border-color: #e91e8c; color: #e91e8c; }
+.for-pill.blue.active { border-color: #4ea0e8; background: #4ea0e8; color: #fff; box-shadow: 0 0 18px rgba(78,160,232,0.30); }
+.for-pill.blue:hover { border-color: #4ea0e8; color: #4ea0e8; }
 .for-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.10); flex-shrink: 0; }
 
 /* ── GIFT MODAL & UI ── */
@@ -557,16 +559,16 @@ body.light::before {
     radial-gradient(ellipse 50% 50% at 50% 90%, rgba(100, 70, 50, 0.04) 0%, transparent 70%);
 }
 body.light nav {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 body.light .cat-bar {
-  background: rgba(255, 255, 255, 0.62);
+  background: rgba(255, 255, 255, 0.80);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
 }
 body.light .nav-search {
   background: rgba(0, 0, 0, 0.04);
@@ -678,8 +680,8 @@ body.theme-her::before {
     radial-gradient(ellipse 50% 50% at 50% 90%, rgba(180, 90, 100, 0.07) 0%, transparent 70%);
 }
 body.theme-her .nav-logo { color: var(--accent); }
-body.theme-her .for-pill.active:not(.pink):not(.blue) { border-color: var(--accent); background: rgba(212,104,124,0.18); color: #f0a0b0; box-shadow: 0 0 20px rgba(212,104,124,0.12); }
-body.theme-her .for-pill:hover:not(.pink):not(.blue) { border-color: var(--accent); color: #f0a0b0; }
+body.theme-her .for-pill.active:not(.pink):not(.blue) { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 18px rgba(212,104,124,0.35); }
+body.theme-her .for-pill:hover:not(.pink):not(.blue) { border-color: var(--accent); color: #d4687c; }
 body.theme-her .nav-search button { background: var(--accent); }
 body.theme-her .nav-search button:hover { background: #e88090; }
 body.theme-her .nav-register { background: var(--accent); }
@@ -700,7 +702,7 @@ body.theme-her .nav-signin:hover { border-color: var(--accent); color: var(--acc
 body.theme-her .listing-card:hover { box-shadow: var(--glass-shadow), 0 0 24px rgba(212,104,124,0.10); }
 body.theme-her .nav-search .stash-icon-btn:hover { color: var(--accent); }
 body.theme-her .cat-tab.gift-tab::after { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-body.theme-her .for-pill.pink { border-color: #d4687c; background: rgba(212,104,124,0.18); color: #f0a0b0; box-shadow: 0 0 20px rgba(212,104,124,0.12); }
+body.theme-her .for-pill.pink { border-color: #d4687c; background: #d4687c; color: #fff; box-shadow: 0 0 18px rgba(212,104,124,0.30); }
 
 /* Theme Her + Light combo */
 body.theme-her.light {
@@ -718,8 +720,8 @@ body.theme-her.light::before {
     radial-gradient(ellipse 32% 42% at 82% 38%, rgba(180, 100, 140, 0.05) 0%, transparent 70%),
     radial-gradient(ellipse 50% 50% at 50% 90%, rgba(160, 90, 100, 0.04) 0%, transparent 70%);
 }
-body.theme-her.light nav { background: rgba(255, 255, 255, 0.72); border-bottom-color: rgba(0,0,0,0.08); }
-body.theme-her.light .cat-bar { background: rgba(255, 255, 255, 0.62); border-bottom-color: rgba(0,0,0,0.06); }
+body.theme-her.light nav { background: rgba(255, 255, 255, 0.88); border-bottom-color: rgba(0,0,0,0.12); }
+body.theme-her.light .cat-bar { background: rgba(255, 255, 255, 0.80); border-bottom-color: rgba(0,0,0,0.10); }
 body.theme-her.light .listing-tag { background: rgba(0,0,0,0.07); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.70); }
 body.theme-her.light .listing-img { filter: brightness(0.92) saturate(0.95); }
 
@@ -750,8 +752,8 @@ body.theme-him::before {
     radial-gradient(ellipse 50% 50% at 50% 90%, rgba(60, 80, 120, 0.07) 0%, transparent 70%);
 }
 body.theme-him .nav-logo { color: var(--accent); }
-body.theme-him .for-pill.active:not(.pink):not(.blue) { border-color: var(--accent); background: rgba(78,144,217,0.18); color: #90c0f0; box-shadow: 0 0 20px rgba(78,144,217,0.12); }
-body.theme-him .for-pill:hover:not(.pink):not(.blue) { border-color: var(--accent); color: #90c0f0; }
+body.theme-him .for-pill.active:not(.pink):not(.blue) { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 18px rgba(78,144,217,0.35); }
+body.theme-him .for-pill:hover:not(.pink):not(.blue) { border-color: var(--accent); color: #4e90d9; }
 body.theme-him .nav-search button { background: var(--accent); }
 body.theme-him .nav-search button:hover { background: #6aa8e8; }
 body.theme-him .nav-register { background: var(--accent); }
@@ -772,7 +774,7 @@ body.theme-him .nav-signin:hover { border-color: var(--accent); color: var(--acc
 body.theme-him .listing-card:hover { box-shadow: var(--glass-shadow), 0 0 24px rgba(78,144,217,0.10); }
 body.theme-him .nav-search .stash-icon-btn:hover { color: var(--accent); }
 body.theme-him .cat-tab.gift-tab::after { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-body.theme-him .for-pill.blue { border-color: #4e90d9; background: rgba(78,144,217,0.18); color: #90c0f0; box-shadow: 0 0 20px rgba(78,144,217,0.12); }
+body.theme-him .for-pill.blue { border-color: #4e90d9; background: #4e90d9; color: #fff; box-shadow: 0 0 18px rgba(78,144,217,0.30); }
 
 /* Theme Him + Light combo */
 body.theme-him.light {
@@ -790,8 +792,8 @@ body.theme-him.light::before {
     radial-gradient(ellipse 32% 42% at 82% 38%, rgba(80, 120, 180, 0.05) 0%, transparent 70%),
     radial-gradient(ellipse 50% 50% at 50% 90%, rgba(50, 70, 110, 0.04) 0%, transparent 70%);
 }
-body.theme-him.light nav { background: rgba(255, 255, 255, 0.72); border-bottom-color: rgba(0,0,0,0.08); }
-body.theme-him.light .cat-bar { background: rgba(255, 255, 255, 0.62); border-bottom-color: rgba(0,0,0,0.06); }
+body.theme-him.light nav { background: rgba(255, 255, 255, 0.88); border-bottom-color: rgba(0,0,0,0.12); }
+body.theme-him.light .cat-bar { background: rgba(255, 255, 255, 0.80); border-bottom-color: rgba(0,0,0,0.10); }
 body.theme-him.light .listing-tag { background: rgba(0,0,0,0.07); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.70); }
 body.theme-him.light .listing-img { filter: brightness(0.92) saturate(0.95); }
 </style>
