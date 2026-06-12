@@ -340,7 +340,7 @@ const COCKTAILS = [
   { name:"Margarita", emoji:"🍸", cat:"classic", diff:"Easy", glass:"Margarita Glass", abv:"18%", color1:"#e8f8e0",color2:"#c8e8b0", flavor:"Bright lime, smooth tequila, salted rim — the perfect balance of sweet, sour & salty.", ingredients:["Tequila","Triple Sec","Lime Juice","Salt"] },
   { name:"Mojito", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Highball", abv:"12%", color1:"#e0f4e8",color2:"#b8e8c8", flavor:"Fresh mint, crisp lime, rum & soda — Cuba's most refreshing export.", ingredients:["White Rum","Lime","Mint","Sugar","Soda"] },
   { name:"Old Fashioned", emoji:"🥃", cat:"spirit", diff:"Easy", glass:"Rocks", abv:"32%", color1:"#f4e8d8",color2:"#d4b898", flavor:"Timeless. Bourbon, bitters, sugar & a twist of orange — the gentleman's cocktail.", ingredients:["Bourbon","Angostura","Sugar","Orange Peel"] },
-  { name:"Negroni", emoji:"🍸", cat:"spirit", diff:"Easy", glass:"Rocks", abv:"24%", color1:"#fce4e0",color2:"#f0b8a8", flavor:"Bold, bitter, and utterly sophisticated. Equal parts gin, Campari & sweet vermouth.", ingredients:["Gin","Campari","Sweet Vermouth"], image:"../../assets/images/Negroni.jpg" },
+  { name:"Negroni", emoji:"🍸", cat:"spirit", diff:"Easy", glass:"Rocks", abv:"24%", color1:"#fce4e0",color2:"#f0b8a8", flavor:"Bold, bitter, and utterly sophisticated. Equal parts gin, Campari & sweet vermouth.", ingredients:["Gin","Campari","Sweet Vermouth"], image:"../../assets/images/Negroni.jpg", detailUrl:"negroni.html" },
   { name:"Cosmopolitan", emoji:"🍸", cat:"modern", diff:"Easy", glass:"Coupe", abv:"20%", color1:"#fce0e8",color2:"#f8b8cc", flavor:"Vodka, cranberry, triple sec & lime — the glamour-pink icon of the '90s.", ingredients:["Vodka","Triple Sec","Cranberry","Lime"] },
   { name:"Dry Martini", emoji:"🍸", cat:"classic", diff:"Medium", glass:"Martini", abv:"28%", color1:"#f0f4f8",color2:"#d0dce8", flavor:"Ice-cold gin, a whisper of dry vermouth, olive or twist. Elegance in a glass.", ingredients:["Gin","Dry Vermouth","Olive/Lemon"] },
   { name:"Daiquiri", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Coupe", abv:"16%", color1:"#f8f4e8",color2:"#e8dcc0", flavor:"Rum, fresh lime & simple syrup — Hemingway's favorite, pure and simple.", ingredients:["White Rum","Lime Juice","Simple Syrup"] },
@@ -362,8 +362,8 @@ function diffClass(d) { if(d==="Easy")return"diff-easy"; if(d==="Medium")return"
 function renderCocktails(filter) {
   const grid = document.getElementById('cocktailGrid');
   const filtered = filter === 'all' ? COCKTAILS : COCKTAILS.filter(c => c.cat === filter);
-  grid.innerHTML = filtered.map(c => `
-    <div class="cocktail-card" data-hobby="${c.name}" data-emoji="${c.emoji}">
+  grid.innerHTML = filtered.map(c => {
+    const cardHTML = `
       <div class="cocktail-visual" style="background:linear-gradient(135deg,${c.color1},${c.color2});">
         ${c.image ? `<img src="${c.image}" alt="${c.name}" class="cocktail-img">` : `<span class="cocktail-glass">${c.emoji}</span>`}
         <span class="cocktail-diff ${diffClass(c.diff)}">${c.diff}</span>
@@ -379,8 +379,12 @@ function renderCocktails(filter) {
           <span class="cocktail-abv">${c.abv} ABV</span>
         </div>
       </div>
-    </div>
-  `).join('');
+    `;
+    if (c.detailUrl) {
+      return `<a href="${c.detailUrl}" class="cocktail-card" data-hobby="${c.name}" data-emoji="${c.emoji}">${cardHTML}</a>`;
+    }
+    return `<div class="cocktail-card" data-hobby="${c.name}" data-emoji="${c.emoji}">${cardHTML}</div>`;
+  }).join('');
   attachHoldListeners();
 }
 

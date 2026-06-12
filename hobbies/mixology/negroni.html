@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negroni — HobbyDIYnSkill Mixology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange: #F1641E;
+  --orange-light: #F4831F;
+  --orange-bg: #FFF8F5;
+  --black: #222222;
+  --gray: #6B6B6B;
+  --gray-light: #e8e3df;
+  --border: #e0d8d2;
+  --white: #FFFFFF;
+  --cream: #FAF7F5;
+  --red: #ef4444;
+  --red-light: #fee2e2;
+  --negroni-red: #c62828;
+  --negroni-rose: #fce4e0;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 999;
+  padding: 0 2rem; height: 68px;
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 680px) 1fr;
+  align-items: center;
+}
+.nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--orange); white-space: nowrap; letter-spacing: -0.02em; cursor: pointer; }
+.nav-left-group { display: flex; align-items: center; gap: 0.6rem; }
+.nav-search {
+  width: 100%; max-width: 800px; justify-self: center;
+  display: flex; align-items: center;
+  border: 2px solid var(--border); border-radius: 3rem; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.nav-search:focus-within { border-color: var(--orange); }
+.nav-search select {
+  border: none; border-right: 1px solid var(--border); background: var(--cream);
+  padding: 0 1rem; height: 44px; font-size: 0.8rem; color: var(--gray);
+  cursor: pointer; outline: none; flex-shrink: 0;
+}
+.nav-search input {
+  flex: 1; border: none; padding: 0 1rem; font-size: 0.88rem; outline: none;
+  background: transparent; color: var(--black);
+}
+.nav-search input::placeholder { color: #b0a8a0; }
+.nav-search button {
+  background: var(--orange); border: none; padding: 0 1.2rem; height: 44px;
+  cursor: pointer; color: white; font-size: 1rem; flex-shrink: 0;
+  transition: background 0.2s;
+}
+.nav-search button:hover { background: var(--orange-light); }
+.nav-actions { display: flex; align-items: center; gap: 0.6rem; justify-self: end; }
+.nav-sell-btn {
+  font-size: 0.68rem; font-weight: 600; color: var(--black);
+  text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 3px;
+  white-space: nowrap; transition: color 0.2s;
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  line-height: 1.2; text-align: center;
+}
+.nav-sell-btn:hover { color: var(--orange); }
+.nav-signin {
+  font-size: 0.82rem; font-weight: 600; background: var(--white);
+  border: 1.5px solid var(--border); border-radius: 3rem; padding: 0.45rem 1rem;
+  cursor: pointer; color: var(--black); transition: all 0.2s; white-space: nowrap;
+}
+.nav-signin:hover { border-color: var(--orange); color: var(--orange); }
+.nav-register {
+  font-size: 0.82rem; font-weight: 700; background: var(--orange);
+  border: none; border-radius: 3rem; padding: 0.5rem 1.1rem;
+  cursor: pointer; color: white; transition: background 0.2s; white-space: nowrap;
+}
+.nav-register:hover { background: #d4521a; }
+
+/* ── CAT BAR ── */
+.cat-bar {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 2rem; display: flex; gap: 0; overflow-x: auto;
+  scrollbar-width: none; position: sticky; top: 68px; z-index: 998;
+}
+.cat-bar::-webkit-scrollbar { display: none; }
+.cat-tab {
+  flex-shrink: 0; padding: 0 1.2rem; height: 48px;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.84rem; font-weight: 500; color: var(--gray);
+  border-bottom: 2.5px solid transparent; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap; text-decoration: none;
+}
+.cat-tab:hover { color: var(--black); border-bottom-color: var(--border); }
+.cat-tab.active { color: var(--black); font-weight: 700; border-bottom-color: var(--black); }
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  max-width: 1000px; margin: 0 auto; padding: 1.2rem 2rem 0;
+  font-size: 0.78rem; color: var(--gray);
+}
+.breadcrumb a { color: var(--orange); text-decoration: none; font-weight: 600; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* ── HERO ── */
+.detail-hero {
+  max-width: 1000px; margin: 1rem auto 0; padding: 0 2rem;
+  display: grid; grid-template-columns: 320px 1fr; gap: 2.5rem; align-items: center;
+}
+.detail-hero-img {
+  width: 320px; height: 320px; border-radius: 16px;
+  object-fit: cover; box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+  background: linear-gradient(135deg, #fce4e0, #f0b8a8);
+}
+.detail-hero-info { }
+.detail-badge-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+.detail-badge {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.28rem 0.75rem; border-radius: 2rem;
+}
+.detail-badge-cat { background: #fce4ec; color: var(--negroni-red); }
+.detail-badge-diff { background: #e8f5e9; color: #2e7d32; }
+.detail-badge-century { background: #fff3e0; color: #e65100; }
+.detail-hero h1 {
+  font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800;
+  color: var(--black); margin-bottom: 0.5rem; letter-spacing: -0.02em;
+}
+.detail-hero-tagline {
+  font-size: 1rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.2rem;
+}
+.detail-quick-stats {
+  display: flex; gap: 1.8rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.detail-quick-stat {
+  text-align: center; background: var(--cream); border-radius: 10px; padding: 0.8rem 1.2rem;
+}
+.detail-quick-stat-num { font-size: 1.3rem; font-weight: 800; color: var(--negroni-red); }
+.detail-quick-stat-lbl { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15rem; }
+.detail-hero-btns { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--negroni-red); color: white; padding: 0.65rem 1.4rem;
+  font-size: 0.85rem; font-weight: 700; border: none; border-radius: 3rem;
+  cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none;
+}
+.btn-primary:hover { background: #a52020; transform: translateY(-1px); }
+.btn-outline {
+  background: transparent; color: var(--black);
+  padding: 0.65rem 1.4rem; font-size: 0.85rem; font-weight: 600;
+  border: 1.5px solid var(--border); border-radius: 3rem;
+  cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none;
+}
+.btn-outline:hover { border-color: var(--negroni-red); color: var(--negroni-red); }
+
+/* ── TAB NAV ── */
+.detail-tabs {
+  max-width: 1000px; margin: 2.5rem auto 0; padding: 0 2rem;
+  display: flex; border-bottom: 2px solid var(--border);
+}
+.detail-tab {
+  padding: 0.9rem 1.5rem; font-size: 0.85rem; font-weight: 600;
+  color: var(--gray); cursor: pointer; border-bottom: 2.5px solid transparent;
+  margin-bottom: -2px; transition: all 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit;
+}
+.detail-tab:hover { color: var(--black); }
+.detail-tab.active { color: var(--negroni-red); border-bottom-color: var(--negroni-red); }
+
+/* ── TAB CONTENT ── */
+.detail-content {
+  max-width: 1000px; margin: 0 auto; padding: 2rem 2rem 3rem;
+}
+.detail-panel { display: none; }
+.detail-panel.active { display: block; }
+
+/* ── RECIPE PANEL ── */
+.recipe-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+}
+.recipe-section { margin-bottom: 2rem; }
+.recipe-section h3 {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 1rem;
+}
+.ingredient-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.ingredient-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.7rem 1rem; background: var(--cream); border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.ingredient-left { display: flex; align-items: center; gap: 0.7rem; }
+.ingredient-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.ingredient-name { font-size: 0.9rem; font-weight: 600; }
+.ingredient-amount { font-size: 0.82rem; color: var(--gray); }
+.ingredient-note { font-size: 0.7rem; color: var(--gray); font-style: italic; margin-top: 0.15rem; }
+
+.steps-list { display: flex; flex-direction: column; gap: 1rem; }
+.step-item {
+  display: flex; gap: 1rem; padding: 1rem;
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+  transition: box-shadow 0.2s;
+}
+.step-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.step-num {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--negroni-red);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; font-weight: 800; flex-shrink: 0;
+}
+.step-text { flex: 1; }
+.step-text strong { font-size: 0.88rem; color: var(--black); display: block; margin-bottom: 0.25rem; }
+.step-text p { font-size: 0.8rem; color: var(--gray); line-height: 1.6; }
+
+.garnish-box {
+  background: linear-gradient(135deg, #fce4e0, #fff); border: 1.5px solid #f0b8a8;
+  border-radius: 12px; padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem;
+}
+.garnish-box-icon { font-size: 2.5rem; }
+.garnish-box-text h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+.garnish-box-text p { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+
+/* ── HISTORY PANEL ── */
+.history-timeline { position: relative; padding-left: 2rem; }
+.history-timeline::before {
+  content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+  width: 2px; background: var(--border);
+}
+.history-event { position: relative; margin-bottom: 2rem; }
+.history-event::before {
+  content: ''; position: absolute; left: -1.75rem; top: 0.35rem;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--negroni-red); border: 2px solid var(--negroni-rose);
+}
+.history-event-year {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--negroni-red); text-transform: uppercase; margin-bottom: 0.3rem;
+}
+.history-event h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+.history-event p { font-size: 0.82rem; color: var(--gray); line-height: 1.7; }
+
+.history-quote {
+  background: var(--cream); border-left: 3px solid var(--negroni-red);
+  padding: 1.2rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0;
+  font-size: 0.9rem; color: var(--gray); font-style: italic; line-height: 1.7;
+}
+
+/* ── VARIATIONS PANEL ── */
+.variation-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; }
+.variation-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.3rem; cursor: pointer; transition: all 0.25s;
+}
+.variation-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-3px); border-color: var(--negroni-red); }
+.variation-card-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+.variation-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+.variation-card p { font-size: 0.78rem; color: var(--gray); line-height: 1.6; margin-bottom: 0.7rem; }
+.variation-card .var-swap {
+  font-size: 0.68rem; font-weight: 600; color: var(--negroni-red);
+  background: var(--negroni-rose); padding: 0.18rem 0.55rem; border-radius: 2rem;
+  display: inline-block;
+}
+
+/* ── TASTING PANEL ── */
+.tasting-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.flavor-spectrum { }
+.flavor-bar { margin-bottom: 1rem; }
+.flavor-bar-label {
+  display: flex; justify-content: space-between; font-size: 0.78rem;
+  font-weight: 600; margin-bottom: 0.3rem;
+}
+.flavor-bar-fill {
+  width: 100%; height: 8px; background: var(--cream); border-radius: 4px; overflow: hidden;
+}
+.flavor-bar-inner {
+  height: 100%; border-radius: 4px; transition: width 0.6s ease;
+}
+.tasting-notes h3 {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 0.8rem;
+}
+.tasting-note-item {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+  font-size: 0.84rem;
+}
+.tasting-note-dot { font-size: 0.6rem; color: var(--negroni-red); }
+
+/* ── PAIRING PANEL ── */
+.pairing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.pairing-card {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem; background: var(--cream); border-radius: 10px;
+  border: 1px solid var(--border); transition: all 0.2s;
+}
+.pairing-card:hover { border-color: var(--negroni-red); }
+.pairing-card-icon { font-size: 2rem; flex-shrink: 0; }
+.pairing-card-text h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.2rem; }
+.pairing-card-text p { font-size: 0.76rem; color: var(--gray); line-height: 1.5; }
+
+/* ── RELATED COCKTAILS ── */
+.related-section { max-width: 1000px; margin: 0 auto; padding: 0 2rem 3rem; }
+.related-section h2 {
+  font-size: 1.1rem; font-weight: 800; color: var(--black); margin-bottom: 1.2rem;
+}
+.related-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; }
+.related-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; cursor: pointer; transition: all 0.2s; text-decoration: none;
+}
+.related-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.related-card-visual {
+  height: 100px; display: flex; align-items: center; justify-content: center;
+  font-size: 2.8rem;
+}
+.related-card-body { padding: 0.6rem 0.8rem; }
+.related-card-name { font-size: 0.82rem; font-weight: 700; color: var(--black); }
+.related-card-glass { font-size: 0.68rem; color: var(--gray); margin-top: 0.2rem; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:800px) {
+  .detail-hero { grid-template-columns: 1fr; text-align: center; }
+  .detail-hero-img { width: 240px; height: 240px; margin: 0 auto; }
+  .detail-quick-stats { justify-content: center; }
+  .detail-hero-btns { justify-content: center; }
+  .recipe-grid { grid-template-columns: 1fr; }
+  .variation-grid { grid-template-columns: 1fr 1fr; }
+  .tasting-grid { grid-template-columns: 1fr; }
+  .pairing-grid { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr 1fr; }
+  .detail-tabs { gap: 0; overflow-x: auto; }
+}
+@media(max-width:500px) {
+  .variation-grid { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 1rem; }
+  .nav-search { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left-group">
+    <div class="nav-logo" onclick="location.href='../../index.html'">HobbyDIYnSkill</div>
+    <a class="nav-sell-btn" href="#">🤖<br>AI</a>
+    <a class="nav-sell-btn" href="#">💬<br>Forum</a>
+  </div>
+  <div class="nav-search">
+    <select>
+      <option>All cocktails</option>
+      <option>Classics</option>
+      <option>Tropical</option>
+      <option>Spirit-Forward</option>
+      <option>Sparkling</option>
+    </select>
+    <input type="text" placeholder="Search cocktails, ingredients...">
+    <button>🔍</button>
+  </div>
+  <div class="nav-actions">
+    <a class="nav-sell-btn" href="#">🔖<br>Saved</a>
+    <a class="nav-sell-btn" href="#">🗄️<br>My Stash</a>
+    <a class="nav-sell-btn" href="#">🛒<br>Cart</a>
+    <button class="nav-signin">Sign in</button>
+    <button class="nav-register">Register</button>
+  </div>
+</nav>
+
+<div class="cat-bar">
+  <a class="cat-tab" href="../../index.html">🏠 Home</a>
+  <a class="cat-tab" href="mixology.html">🍸 Mixology</a>
+  <a class="cat-tab" href="#">🧵 Fiber Arts</a>
+  <a class="cat-tab" href="#">🪵 Woodworking</a>
+  <a class="cat-tab" href="#">🎨 Miniatures</a>
+  <a class="cat-tab" href="#">🎩 Magic</a>
+  <a class="cat-tab" href="#">🏺 Ceramics</a>
+  <a class="cat-tab" href="#">💡 Electronics</a>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="../../index.html">Home</a> &rsaquo; <a href="mixology.html">Mixology</a> &rsaquo; Negroni
+</div>
+
+<!-- HERO -->
+<div class="detail-hero">
+  <img class="detail-hero-img" src="../../assets/images/Negroni.jpg" alt="Negroni Cocktail" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+  <div style="width:320px;height:320px;border-radius:16px;background:linear-gradient(135deg,#fce4e0,#f0b8a8);display:none;align-items:center;justify-content:center;font-size:7rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));">🍸</div>
+  <div class="detail-hero-info">
+    <div class="detail-badge-row">
+      <span class="detail-badge detail-badge-cat">Spirit-Forward</span>
+      <span class="detail-badge detail-badge-diff">Easy</span>
+      <span class="detail-badge detail-badge-century">Since 1919</span>
+    </div>
+    <h1>Negroni</h1>
+    <p class="detail-hero-tagline">Bold, bitter, and utterly sophisticated. The equal-parts Italian icon that has captivated palates for over a century — gin, Campari, and sweet vermouth in perfect harmony.</p>
+    <div class="detail-quick-stats">
+      <div class="detail-quick-stat">
+        <div class="detail-quick-stat-num">24%</div>
+        <div class="detail-quick-stat-lbl">ABV</div>
+      </div>
+      <div class="detail-quick-stat">
+        <div class="detail-quick-stat-num">3</div>
+        <div class="detail-quick-stat-lbl">Ingredients</div>
+      </div>
+      <div class="detail-quick-stat">
+        <div class="detail-quick-stat-num">2 min</div>
+        <div class="detail-quick-stat-lbl">Prep Time</div>
+      </div>
+      <div class="detail-quick-stat">
+        <div class="detail-quick-stat-num">Rocks</div>
+        <div class="detail-quick-stat-lbl">Glass</div>
+      </div>
+    </div>
+    <div class="detail-hero-btns">
+      <a href="#recipe" class="btn-primary" onclick="switchTab('recipe')">🍸 View Recipe</a>
+      <button class="btn-outline" onclick="alert('Added to My Stash!')">🗄️ Save to My Stash</button>
+      <button class="btn-outline" onclick="alert('Image saved!')">⬇ Download Card</button>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="detail-tabs" id="detailTabs">
+  <button class="detail-tab active" data-tab="recipe">📖 Recipe</button>
+  <button class="detail-tab" data-tab="history">📜 History</button>
+  <button class="detail-tab" data-tab="variations">🔄 Variations</button>
+  <button class="detail-tab" data-tab="tasting">👅 Tasting Profile</button>
+  <button class="detail-tab" data-tab="pairing">🍽️ Pairings</button>
+</div>
+
+<!-- RECIPE PANEL -->
+<div class="detail-content">
+  <div class="detail-panel active" id="panel-recipe">
+    <div class="recipe-grid">
+      <div>
+        <div class="recipe-section">
+          <h3>🥃 Ingredients</h3>
+          <div class="ingredient-list">
+            <div class="ingredient-item">
+              <div class="ingredient-left">
+                <div class="ingredient-dot" style="background:#e8e0d0;"></div>
+                <div>
+                  <div class="ingredient-name">London Dry Gin</div>
+                  <div class="ingredient-note">Tanqueray or Beefeater recommended</div>
+                </div>
+              </div>
+              <div class="ingredient-amount">30 ml</div>
+            </div>
+            <div class="ingredient-item">
+              <div class="ingredient-left">
+                <div class="ingredient-dot" style="background:#d42020;"></div>
+                <div>
+                  <div class="ingredient-name">Campari</div>
+                  <div class="ingredient-note">The irreplaceable bitter heart</div>
+                </div>
+              </div>
+              <div class="ingredient-amount">30 ml</div>
+            </div>
+            <div class="ingredient-item">
+              <div class="ingredient-left">
+                <div class="ingredient-dot" style="background:#8b2020;"></div>
+                <div>
+                  <div class="ingredient-name">Sweet Vermouth</div>
+                  <div class="ingredient-note">Carpano Antica or Cocchi di Torino</div>
+                </div>
+              </div>
+              <div class="ingredient-amount">30 ml</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="recipe-section">
+          <h3>🔧 Equipment</h3>
+          <div class="ingredient-list">
+            <div class="ingredient-item"><div class="ingredient-left"><div class="ingredient-dot" style="background:var(--gray);"></div><div class="ingredient-name">Mixing Glass</div></div></div>
+            <div class="ingredient-item"><div class="ingredient-left"><div class="ingredient-dot" style="background:var(--gray);"></div><div class="ingredient-name">Bar Spoon</div></div></div>
+            <div class="ingredient-item"><div class="ingredient-left"><div class="ingredient-dot" style="background:var(--gray);"></div><div class="ingredient-name">Jigger</div></div></div>
+            <div class="ingredient-item"><div class="ingredient-left"><div class="ingredient-dot" style="background:var(--gray);"></div><div class="ingredient-name">Rocks Glass</div></div></div>
+            <div class="ingredient-item"><div class="ingredient-left"><div class="ingredient-dot" style="background:var(--gray);"></div><div class="ingredient-name">Peeler / Knife</div></div></div>
+            <div class="ingredient-item"><div class="ingredient-left"><div class="ingredient-dot" style="background:var(--gray);"></div><div class="ingredient-name">Large Ice Cube Tray</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="recipe-section">
+          <h3>📋 Steps</h3>
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div class="step-text">
+                <strong>Chill Your Glass</strong>
+                <p>Fill a rocks glass with ice or place it in the freezer while you prepare. A chilled glass keeps your Negroni cold longer.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div class="step-text">
+                <strong>Measure & Pour</strong>
+                <p>Using a jigger, measure 30ml each of gin, Campari, and sweet vermouth into a mixing glass filled with ice.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div class="step-text">
+                <strong>Stir — Don't Shake</strong>
+                <p>Stir gently with a bar spoon for 20–30 seconds until well-chilled. Negronis are always stirred, never shaken — this preserves the silky texture and avoids cloudiness.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">4</div>
+              <div class="step-text">
+                <strong>Strain Over Ice</strong>
+                <p>Discard the ice from your chilled rocks glass. Add one large fresh ice cube (or a few smaller cubes). Strain the cocktail over the ice.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">5</div>
+              <div class="step-text">
+                <strong>Garnish & Serve</strong>
+                <p>Using a peeler, cut a wide strip of orange peel. Twist it over the glass to express the oils onto the surface, then drop it in or perch it on the rim.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="recipe-section">
+          <h3>🍊 Garnish</h3>
+          <div class="garnish-box">
+            <div class="garnish-box-icon">🍊</div>
+            <div class="garnish-box-text">
+              <h4>Orange Peel — The Essential Finish</h4>
+              <p>The orange oils are not decorative — they bridge the gin's botanicals with the Campari's bitterness. Always twist over the drink, skin-side down, so the oils land on the surface.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY PANEL -->
+  <div class="detail-panel" id="panel-history">
+    <div class="history-quote">"The Negroni is not just a cocktail — it is a century of Italian elegance poured into a glass."</div>
+    <div class="history-timeline">
+      <div class="history-event">
+        <div class="history-event-year">1919</div>
+        <h4>Count Camillo Negroni Walks Into a Bar</h4>
+        <p>At Caffè Casoni in Florence, Count Camillo Negroni — a well-traveled aristocrat who had spent years in America and London — asks his friend, bartender Fosco Scarselli, to strengthen his usual Americano by replacing the soda water with gin. The Negroni is born.</p>
+      </div>
+      <div class="history-event">
+        <div class="history-event-year">1920s</div>
+        <h4>The Negroni Family Embraces the Legacy</h4>
+        <p>The drink gains popularity rapidly among Florence's café society. Count Negroni's family eventually establishes the Negroni Distillery in Treviso, producing a ready-made bottled version — though purists insist on freshly mixed.</p>
+      </div>
+      <div class="history-event">
+        <div class="history-event-year">1947</div>
+        <h4>Orson Welles Discovers the Negroni</h4>
+        <p>While filming in Italy, Orson Welles famously declares: "The bitters are excellent for your liver, the gin is bad for you. They balance each other." His endorsement introduces the Negroni to the American imagination.</p>
+      </div>
+      <div class="history-event">
+        <div class="history-event-year">2013</div>
+        <h4>Negroni Week is Born</h4>
+        <p>Imbibe Magazine and Campari launch Negroni Week — a global charity event where bars worldwide serve Negronis and donate proceeds. It becomes the largest cocktail charity initiative in history.</p>
+      </div>
+      <div class="history-event">
+        <div class="history-event-year">Today</div>
+        <h4>World's #1 Classic Cocktail</h4>
+        <p>In 2024, Drinks International names the Negroni the world's best-selling classic cocktail for the 10th consecutive year. Few drinks combine simplicity, depth, and cultural weight like this one.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VARIATIONS PANEL -->
+  <div class="detail-panel" id="panel-variations">
+    <div class="variation-grid">
+      <div class="variation-card">
+        <div class="variation-card-icon">🥂</div>
+        <h4>Negroni Sbagliato</h4>
+        <p>"Sbagliato" means "mistaken" — a bartender accidentally used prosecco instead of gin. The happy accident became a beloved lighter, sparkling variant.</p>
+        <span class="var-swap">Gin → Prosecco</span>
+      </div>
+      <div class="variation-card">
+        <div class="variation-card-icon">🤍</div>
+        <h4>White Negroni</h4>
+        <p>Created in 2001 by Wayne Collins. Swaps Campari for Suze (gentian liqueur) and sweet vermouth for Lillet Blanc — floral, golden, and elegant.</p>
+        <span class="var-swap">Campari → Suze / Vermouth → Lillet Blanc</span>
+      </div>
+      <div class="variation-card">
+        <div class="variation-card-icon">🥃</div>
+        <h4>Boulevardier</h4>
+        <p>The Negroni's whiskey cousin. Bourbon replaces gin, adding caramel warmth. Perfect for colder months. First documented in 1927 by Harry MacElhone.</p>
+        <span class="var-swap">Gin → Bourbon</span>
+      </div>
+      <div class="variation-card">
+        <div class="variation-card-icon">🍫</div>
+        <h4>Chocolate Negroni</h4>
+        <p>Add a bar spoon of crème de cacao. The chocolate notes amplify the vermouth's richness and the Campari's orange undertones.</p>
+        <span class="var-swap">+ Crème de Cacao</span>
+      </div>
+      <div class="variation-card">
+        <div class="variation-card-icon">💨</div>
+        <h4>Smoked Negroni</h4>
+        <p>Infuse the glass with cherry wood smoke before pouring. The smokiness complements the Campari's bitterness for a dramatically different experience.</p>
+        <span class="var-swap">+ Smoked Glass</span>
+      </div>
+      <div class="variation-card">
+        <div class="variation-card-icon">🫧</div>
+        <h4>Negroni Fizz</h4>
+        <p>Top with soda water for a refreshing long drink. Lighter, sessionable, and perfect for summer afternoons.</p>
+        <span class="var-swap">+ Soda Water</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TASTING PANEL -->
+  <div class="detail-panel" id="panel-tasting">
+    <div class="tasting-grid">
+      <div class="flavor-spectrum">
+        <div class="recipe-section"><h3>🎯 Flavor Spectrum</h3></div>
+        <div class="flavor-bar">
+          <div class="flavor-bar-label"><span>Sweetness</span><span>Low</span></div>
+          <div class="flavor-bar-fill"><div class="flavor-bar-inner" style="width:25%;background:#f4a460;"></div></div>
+        </div>
+        <div class="flavor-bar">
+          <div class="flavor-bar-label"><span>Bitterness</span><span>High</span></div>
+          <div class="flavor-bar-fill"><div class="flavor-bar-inner" style="width:85%;background:#c62828;"></div></div>
+        </div>
+        <div class="flavor-bar">
+          <div class="flavor-bar-label"><span>Botanical</span><span>Medium-High</span></div>
+          <div class="flavor-bar-fill"><div class="flavor-bar-inner" style="width:70%;background:#2e7d32;"></div></div>
+        </div>
+        <div class="flavor-bar">
+          <div class="flavor-bar-label"><span>Herbal</span><span>Medium</span></div>
+          <div class="flavor-bar-fill"><div class="flavor-bar-inner" style="width:55%;background:#6b8e23;"></div></div>
+        </div>
+        <div class="flavor-bar">
+          <div class="flavor-bar-label"><span>Citrus</span><span>Medium</span></div>
+          <div class="flavor-bar-fill"><div class="flavor-bar-inner" style="width:50%;background:#f39c12;"></div></div>
+        </div>
+        <div class="flavor-bar">
+          <div class="flavor-bar-label"><span>Body</span><span>Medium-Full</span></div>
+          <div class="flavor-bar-fill"><div class="flavor-bar-inner" style="width:60%;background:var(--gray);"></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="tasting-notes">
+          <h3>👃 Aroma</h3>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Juniper-forward gin botanicals</div>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Bitter orange & gentian from Campari</div>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Warm vanilla & spice from vermouth</div>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Fresh citrus oil from expressed orange peel</div>
+        </div>
+        <div class="tasting-notes" style="margin-top:1.5rem;">
+          <h3>👅 Palate</h3>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Opens with bold, assertive bitterness</div>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Mid-palate: herbal complexity & subtle sweetness</div>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Long, dry finish with lingering orange</div>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Silky mouthfeel from proper stirring</div>
+        </div>
+        <div class="tasting-notes" style="margin-top:1.5rem;">
+          <h3>⏱️ Best Enjoyed</h3>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Aperitivo hour (6–8 PM)</div>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Before dinner — opens the appetite</div>
+          <div class="tasting-note-item"><span class="tasting-note-dot">●</span> Year-round, but especially autumn</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIRING PANEL -->
+  <div class="detail-panel" id="panel-pairing">
+    <div class="pairing-grid">
+      <div class="pairing-card">
+        <div class="pairing-card-icon">🧀</div>
+        <div class="pairing-card-text">
+          <h4>Aged Parmigiano-Reggiano</h4>
+          <p>The salty, crystalline texture of aged parmesan mirrors the Negroni's bitter bite — a classic Italian pairing.</p>
+        </div>
+      </div>
+      <div class="pairing-card">
+        <div class="pairing-card-icon">🍖</div>
+        <div class="pairing-card-text">
+          <h4>Prosciutto di Parma</h4>
+          <p>Salty, fatty cured ham balances the cocktail's bitterness. Add a few olives for the full aperitivo experience.</p>
+        </div>
+      </div>
+      <div class="pairing-card">
+        <div class="pairing-card-icon">🫒</div>
+        <div class="pairing-card-text">
+          <h4>Castelvetrano Olives</h4>
+          <p>Buttery green olives with a mild brine — the vegetal notes complement Campari's herbal backbone.</p>
+        </div>
+      </div>
+      <div class="pairing-card">
+        <div class="pairing-card-icon">🍫</div>
+        <div class="pairing-card-text">
+          <h4>Dark Chocolate (70%+)</h4>
+          <p>The bitterness of dark chocolate creates a surprising but beautiful echo of the Campari. Try it after dinner.</p>
+        </div>
+      </div>
+      <div class="pairing-card">
+        <div class="pairing-card-icon">🍕</div>
+        <div class="pairing-card-text">
+          <h4>Margherita Pizza</h4>
+          <p>Simple, classic, and Italian. The tomato acidity sings alongside the Negroni's bitter-sweet profile.</p>
+        </div>
+      </div>
+      <div class="pairing-card">
+        <div class="pairing-card-icon">🥜</div>
+        <div class="pairing-card-text">
+          <h4>Smoked Almonds</h4>
+          <p>The smoky, savory crunch provides a textural contrast and amplifies the gin's botanical notes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED COCKTAILS -->
+<div class="related-section">
+  <h2>🍸 You Might Also Like</h2>
+  <div class="related-grid">
+    <a class="related-card" href="negroni.html">
+      <div class="related-card-visual" style="background:linear-gradient(135deg,#fce4e0,#f0b8a8);">🍸</div>
+      <div class="related-card-body">
+        <div class="related-card-name">Negroni</div>
+        <div class="related-card-glass">Rocks · 24% ABV</div>
+      </div>
+    </a>
+    <a class="related-card" href="#">
+      <div class="related-card-visual" style="background:linear-gradient(135deg,#f4e0d0,#d4a888);">🥃</div>
+      <div class="related-card-body">
+        <div class="related-card-name">Boulevardier</div>
+        <div class="related-card-glass">Coupe · 30% ABV</div>
+      </div>
+    </a>
+    <a class="related-card" href="#">
+      <div class="related-card-visual" style="background:linear-gradient(135deg,#f0f4f8,#d0dce8);">🍸</div>
+      <div class="related-card-body">
+        <div class="related-card-name">Dry Martini</div>
+        <div class="related-card-glass">Martini · 28% ABV</div>
+      </div>
+    </a>
+    <a class="related-card" href="#">
+      <div class="related-card-visual" style="background:linear-gradient(135deg,#f4e8d8,#d4b898);">🥃</div>
+      <div class="related-card-body">
+        <div class="related-card-name">Old Fashioned</div>
+        <div class="related-card-glass">Rocks · 32% ABV</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<script>
+function switchTab(tabName) {
+  document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('active'));
+
+  const tabEl = document.querySelector(`.detail-tab[data-tab="${tabName}"]`);
+  if (tabEl) tabEl.classList.add('active');
+
+  const panelEl = document.getElementById('panel-' + tabName);
+  if (panelEl) panelEl.classList.add('active');
+
+  if (tabName === 'recipe') {
+    document.getElementById('recipe').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+document.querySelectorAll('.detail-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+</script>
+
+</body>
+</html>
