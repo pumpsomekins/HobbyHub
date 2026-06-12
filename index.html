@@ -468,7 +468,7 @@ footer {
   <a class="cat-tab" href="#">🧵 Fiber Arts</a>
   <a class="cat-tab" href="#">🪵 Woodworking</a>
   <a class="cat-tab" href="#">🎨 Miniatures</a>
-  <a class="cat-tab" href="mixology.html">🍸 Mixology</a>
+  <a class="cat-tab" href="hobbies/mixology/mixology.html">🍸 Mixology</a>
   <a class="cat-tab" href="#">🎩 Magic</a>
   <a class="cat-tab" href="#">🏺 Ceramics</a>
   <a class="cat-tab" href="#">💡 Electronics</a>
@@ -1096,9 +1096,12 @@ footer {
   // Category tab highlight
   document.querySelectorAll('.cat-tab').forEach(tab => {
     tab.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+      const href = tab.getAttribute('href');
+      if (!href || href === '#') {
+        e.preventDefault();
+        document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      }
     });
   });
 
