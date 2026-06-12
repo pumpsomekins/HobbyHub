@@ -3,94 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mixology �?HobbyHub</title>
+<title>Mixology — HobbyHub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
+  /* Liquid Glass palette */
+  --accent: #F1641E;
+  --accent-soft: rgba(241, 100, 30, 0.22);
+  --accent-glow: 0 0 30px rgba(241, 100, 30, 0.25);
+  --text-primary: rgba(255, 255, 255, 0.94);
+  --text-secondary: rgba(255, 255, 255, 0.58);
+  --text-tertiary: rgba(255, 255, 255, 0.38);
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.10);
+  --glass-bg-light: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --glass-border-strong: rgba(255, 255, 255, 0.18);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.22), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  --glass-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.16), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-full: 9999px;
   --orange: #F1641E;
   --orange-light: #F4831F;
-  --orange-bg: #FFF8F5;
-  --black: #222222;
-  --gray: #6B6B6B;
-  --gray-light: #e8e3df;
-  --border: #e0d8d2;
-  --white: #FFFFFF;
-  --cream: #FAF7F5;
-  --red: #ef4444;
-  --red-light: #fee2e2;
+  --orange-bg: rgba(241, 100, 30, 0.08);
+  --gray: rgba(255, 255, 255, 0.55);
+  --gray-light: rgba(255, 255, 255, 0.18);
+  --border: rgba(255, 255, 255, 0.12);
+  --red: #f06868;
+  --red-light: rgba(240, 104, 104, 0.18);
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
-
-.util-bar {
-  background: var(--black); color: rgba(255,255,255,0.75);
-  font-size: 0.75rem; text-align: center; padding: 0.45rem 1rem;
-  letter-spacing: 0.02em;
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, #1c1416 0%, #14101a 35%, #0c0c14 70%, #07070d 100%);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
 }
-.util-bar a { color: #F1641E; text-decoration: none; font-weight: 600; }
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(ellipse 40% 50% at 18% 22%, rgba(241, 100, 30, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 32% 42% at 82% 38%, rgba(180, 90, 200, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 50% 90%, rgba(120, 80, 60, 0.07) 0%, transparent 70%);
+}
 
+/* ── UTIL BAR ── */
+.util-bar {
+  background: transparent; color: var(--text-tertiary);
+  font-size: 0.74rem; text-align: center; padding: 0.5rem 1rem;
+  letter-spacing: 0.02em; border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.util-bar a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.util-bar a:hover { opacity: 0.85; }
+
+/* ── NAV (frosted glass) ── */
 nav {
-  background: var(--white); border-bottom: 1px solid var(--border);
+  background: rgba(14, 12, 18, 0.88);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   position: sticky; top: 0; z-index: 999;
   padding: 0 2rem; height: 68px;
   display: grid;
-  grid-template-columns: 1fr minmax(300px, 680px) 1fr;
+  grid-template-columns: auto auto 1fr auto;
   align-items: center;
 }
 .nav-logo {
-  font-size: 1.5rem; font-weight: 800; color: var(--orange); white-space: nowrap;
+  font-size: 1.5rem; font-weight: 800; color: var(--accent); white-space: nowrap;
   letter-spacing: -0.02em; cursor: pointer;
 }
-.nav-left-group { display: flex; align-items: center; gap: 0.6rem; }
+.nav-left-group { display: flex; align-items: center; }
+.nav-ai-forum { display: flex; align-items: center; gap: 0.5rem; margin-left: 0.8rem; }
 .nav-search {
   width: 100%; max-width: 800px; justify-self: center;
   display: flex; align-items: center;
-  border: 2px solid var(--border); border-radius: 3rem; overflow: hidden;
-  transition: border-color 0.2s;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-full); overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
 }
-.nav-search:focus-within { border-color: var(--orange); }
+.nav-search:focus-within {
+  border-color: var(--accent); background: rgba(255,255,255,0.08);
+  box-shadow: var(--accent-glow);
+}
 .nav-search select {
-  border: none; border-right: 1px solid var(--border); background: var(--cream);
-  padding: 0 1rem; height: 44px; font-size: 0.8rem; color: var(--gray);
+  border: none; border-right: 1px solid rgba(255,255,255,0.08);
+  background: transparent;
+  padding: 0 1rem; height: 42px; font-size: 0.8rem; color: var(--text-secondary);
   cursor: pointer; outline: none; flex-shrink: 0;
 }
+.nav-search select option { background: #1a141c; color: #fff; }
 .nav-search input {
   flex: 1; border: none; padding: 0 1rem; font-size: 0.88rem; outline: none;
-  background: transparent; color: var(--black);
+  background: transparent; color: var(--text-primary);
 }
-.nav-search input::placeholder { color: #b0a8a0; }
+.nav-search input::placeholder { color: rgba(255,255,255,0.28); }
 .nav-search button {
-  background: var(--orange); border: none; padding: 0 1.2rem; height: 44px;
+  background: var(--accent); border: none; padding: 0 1.2rem; height: 42px;
   cursor: pointer; color: white; font-size: 1rem; flex-shrink: 0;
   transition: background 0.2s;
 }
 .nav-search button:hover { background: var(--orange-light); }
 .nav-actions { display: flex; align-items: center; gap: 0.6rem; justify-self: end; }
 .nav-sell-btn {
-  font-size: 0.68rem; font-weight: 600; color: var(--black);
-  text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 3px;
+  font-size: 0.68rem; font-weight: 600; color: var(--text-secondary);
+  text-decoration: none; padding: 0.3rem 0.5rem; border-radius: 8px;
   white-space: nowrap; transition: color 0.2s;
   display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
   line-height: 1.2; text-align: center;
 }
-.nav-sell-btn:hover { color: var(--orange); }
+.nav-sell-btn:hover { color: var(--accent); }
 .nav-signin {
-  font-size: 0.82rem; font-weight: 600; background: var(--white);
-  border: 1.5px solid var(--border); border-radius: 3rem; padding: 0.45rem 1rem;
-  cursor: pointer; color: var(--black); transition: all 0.2s; white-space: nowrap;
+  font-size: 0.82rem; font-weight: 600;
+  background: var(--glass-bg); backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border); border-radius: var(--radius-full);
+  padding: 0.45rem 1rem; cursor: pointer; color: var(--text-primary);
+  transition: all 0.25s; white-space: nowrap;
 }
-.nav-signin:hover { border-color: var(--orange); color: var(--orange); }
+.nav-signin:hover { border-color: var(--accent); color: var(--accent); }
 .nav-register {
-  font-size: 0.82rem; font-weight: 700; background: var(--orange);
-  border: none; border-radius: 3rem; padding: 0.5rem 1.1rem;
-  cursor: pointer; color: white; transition: background 0.2s; white-space: nowrap;
+  font-size: 0.82rem; font-weight: 700; background: var(--accent);
+  border: none; border-radius: var(--radius-full); padding: 0.5rem 1.1rem;
+  cursor: pointer; color: white; transition: all 0.25s; white-space: nowrap;
 }
-.nav-register:hover { background: #d4521a; }
+.nav-register:hover { background: #d4521a; box-shadow: var(--accent-glow); }
 
+/* ── CATEGORY TABS (glass) ── */
 .cat-bar {
-  background: var(--white); border-bottom: 1px solid var(--border);
+  background: rgba(14, 12, 18, 0.78);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   padding: 0 2rem; display: flex; gap: 0; overflow-x: auto;
   scrollbar-width: none; position: sticky; top: 68px; z-index: 998;
 }
@@ -98,12 +147,12 @@ nav {
 .cat-tab {
   flex-shrink: 0; padding: 0 1.2rem; height: 48px;
   display: flex; align-items: center; gap: 0.5rem;
-  font-size: 0.84rem; font-weight: 500; color: var(--gray);
-  border-bottom: 2.5px solid transparent; cursor: pointer;
-  transition: all 0.2s; white-space: nowrap; text-decoration: none;
+  font-size: 0.84rem; font-weight: 500; color: var(--text-secondary);
+  border-bottom: 2px solid transparent; cursor: pointer;
+  transition: all 0.25s; white-space: nowrap; text-decoration: none;
 }
-.cat-tab:hover { color: var(--black); border-bottom-color: var(--border); }
-.cat-tab.active { color: var(--black); font-weight: 700; border-bottom-color: var(--black); }
+.cat-tab:hover { color: var(--text-primary); }
+.cat-tab.active { color: var(--text-primary); font-weight: 700; border-bottom-color: var(--accent); }
 
 /* ── MIXOLOGY HERO ── */
 .mix-hero {
@@ -120,28 +169,30 @@ nav {
 .mix-hero p { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 560px; margin: 0 auto 1.5rem; }
 .mix-hero-stats { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; }
 .mix-stat { text-align: center; }
-.mix-stat-num { font-size: 1.6rem; font-weight: 800; color: var(--orange); }
+.mix-stat-num { font-size: 1.6rem; font-weight: 800; color: var(--accent); }
 .mix-stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; }
 
-/* ── FILTER CHIPS ── */
+/* ── FILTER CHIPS (glass) ── */
 .filter-strip {
-  background: var(--cream); border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem; display: flex; align-items: center; gap: 1.5rem;
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 1.1rem 2rem; display: flex; align-items: center; gap: 1.5rem;
   flex-wrap: wrap; justify-content: center;
 }
 .filter-label {
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--gray); white-space: nowrap;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-tertiary); white-space: nowrap;
 }
-.filter-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.filter-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 .filter-chip {
-  background: var(--white); border: 1.5px solid var(--border);
-  border-radius: 2rem; padding: 0.4rem 0.9rem; cursor: pointer;
-  font-size: 0.78rem; font-weight: 500; color: var(--black);
-  transition: all 0.2s; white-space: nowrap; font-family: inherit;
+  background: var(--glass-bg); backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full); padding: 0.34rem 0.9rem; cursor: pointer;
+  font-size: 0.78rem; font-weight: 500; color: var(--text-primary);
+  transition: all 0.25s; white-space: nowrap; font-family: inherit;
 }
-.filter-chip:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-bg); }
-.filter-chip.active { border-color: var(--orange); background: var(--orange); color: white; }
+.filter-chip:hover { border-color: var(--accent); color: var(--accent); }
+.filter-chip.active { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 18px rgba(241,100,30,0.30); }
 
 /* ── COCKTAIL GRID ── */
 .cocktail-grid {
@@ -150,37 +201,52 @@ nav {
 }
 
 .cocktail-card {
-  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
-  overflow: hidden; cursor: pointer; transition: all 0.25s;
+  background: var(--glass-bg); backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border); border-radius: var(--radius-md);
+  overflow: hidden; cursor: pointer; transition: all 0.3s;
   position: relative; user-select: none; -webkit-user-select: none;
+  box-shadow: var(--glass-shadow-sm);
+  text-decoration: none; color: inherit; display: block;
 }
-.cocktail-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.12); transform: translateY(-3px); }
+.cocktail-card:hover {
+  border-color: rgba(255,255,255,0.20);
+  box-shadow: var(--glass-shadow), 0 0 24px rgba(241,100,30,0.10);
+  transform: translateY(-3px);
+}
 .cocktail-visual {
   height: 180px; display: flex; align-items: center; justify-content: center;
   font-size: 4.5rem; position: relative; overflow: hidden;
+  filter: brightness(0.55) saturate(0.85);
+}
+.cocktail-visual::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.25));
+  pointer-events: none;
 }
 .cocktail-glass { font-size: 5rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
 .cocktail-img { width: 100%; height: 100%; object-fit: cover; }
 .cocktail-diff {
   position: absolute; top: 12px; right: 12px;
   font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 0.25rem 0.65rem; border-radius: 2rem;
+  padding: 0.25rem 0.65rem; border-radius: var(--radius-full);
+  backdrop-filter: blur(8px); border: 1px solid transparent;
 }
-.diff-easy { background: #e8f5e9; color: #2e7d32; }
-.diff-medium { background: #fff3e0; color: #e65100; }
-.diff-hard { background: #fce4ec; color: #c62828; }
-.cocktail-body { padding: 1rem 1.2rem; }
-.cocktail-name { font-size: 1rem; font-weight: 700; color: var(--black); margin-bottom: 0.3rem; }
-.cocktail-flavor { font-size: 0.75rem; color: var(--gray); line-height: 1.5; margin-bottom: 0.6rem; }
-.cocktail-ingredients { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.diff-easy { background: rgba(80, 200, 130, 0.18); color: #8edc9c; border-color: rgba(80, 200, 130, 0.3); }
+.diff-medium { background: rgba(220, 160, 60, 0.18); color: #f0c070; border-color: rgba(220, 160, 60, 0.3); }
+.diff-hard { background: rgba(240, 104, 104, 0.18); color: #f09090; border-color: rgba(240, 104, 104, 0.3); }
+.cocktail-body { padding: 0.95rem 1rem 1rem; }
+.cocktail-name { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); line-height: 1.35; margin-bottom: 0.3rem; }
+.cocktail-flavor { font-size: 0.7rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.6rem; }
+.cocktail-ingredients { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 .cocktail-ing {
-  font-size: 0.65rem; font-weight: 500; background: var(--cream);
-  border: 1px solid var(--border); border-radius: 2rem;
-  padding: 0.18rem 0.55rem; color: var(--gray);
+  font-size: 0.65rem; font-weight: 600; background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.20); border-radius: var(--radius-full);
+  padding: 0.2rem 0.6rem; color: rgba(255,255,255,0.82); letter-spacing: 0.01em;
 }
-.cocktail-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 0.7rem; padding-top: 0.7rem; border-top: 1px solid var(--border); }
-.cocktail-glass-type { font-size: 0.68rem; color: var(--gray); display: flex; align-items: center; gap: 0.3rem; }
-.cocktail-abv { font-size: 0.7rem; font-weight: 700; color: var(--orange); }
+.cocktail-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px solid var(--glass-border); }
+.cocktail-glass-type { font-size: 0.68rem; color: var(--text-tertiary); display: flex; align-items: center; gap: 0.3rem; }
+.cocktail-abv { font-size: 0.7rem; font-weight: 700; color: var(--accent); }
 
 /* ── HOLD PROGRESS OVERLAY ── */
 .hold-overlay {
@@ -192,44 +258,51 @@ nav {
   position: relative; width: 100px; height: 100px;
 }
 .hold-ring svg { transform: rotate(-90deg); width: 100px; height: 100px; }
-.hold-ring-bg { fill: none; stroke: rgba(0,0,0,0.08); stroke-width: 4; }
-.hold-ring-fill { fill: none; stroke: var(--orange); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 283; stroke-dashoffset: 283; transition: stroke-dashoffset 0.1s linear; }
+.hold-ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 4; }
+.hold-ring-fill { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 283; stroke-dashoffset: 283; transition: stroke-dashoffset 0.1s linear; }
 .hold-ring-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
 
 /* ── HISTORY MODAL ── */
 .history-modal {
   position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 10002;
   display: none; align-items: center; justify-content: center; padding: 1rem;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
 }
 .history-modal.open { display: flex; }
 .history-modal-content {
-  background: var(--white); border-radius: 14px; max-width: 520px; width: 100%;
-  max-height: 85vh; overflow-y: auto; animation: slideUp 0.3s ease;
+  background: rgba(20, 16, 24, 0.88); backdrop-filter: blur(30px) saturate(140%);
+  -webkit-backdrop-filter: blur(30px) saturate(140%);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-lg); max-width: 520px; width: 100%;
+  max-height: 85vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  color: var(--text-primary);
+  animation: slideUp 0.3s ease;
 }
 @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 .history-modal-header {
-  padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--border);
+  padding: 1.2rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08);
   display: flex; align-items: center; justify-content: space-between;
-  background: var(--cream); border-radius: 14px 14px 0 0;
 }
-.history-modal-header h3 { font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
-.history-modal-close { border: none; background: none; font-size: 1.5rem; cursor: pointer; color: var(--gray); }
+.history-modal-header h3 { font-size: 1.1rem; font-weight: 800; color: var(--text-primary); }
+.history-modal-close { border: none; background: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); transition: color 0.2s; }
+.history-modal-close:hover { color: var(--text-primary); }
 .history-modal-body { padding: 1.5rem; }
 .history-icon-circle {
   width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 2rem; margin: 0 auto 1rem;
+  font-size: 2rem; margin: 0 auto 1rem; box-shadow: 0 0 30px rgba(241,100,30,0.2);
 }
 .history-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1.2rem; }
 .history-stat {
-  background: var(--cream); border-radius: 10px; padding: 1rem; text-align: center;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-sm); padding: 1rem; text-align: center;
 }
-.history-stat-val { font-size: 1.3rem; font-weight: 800; color: var(--black); }
-.history-stat-lbl { font-size: 0.68rem; color: var(--gray); margin-top: 0.2rem; }
+.history-stat-val { font-size: 1.3rem; font-weight: 800; color: var(--text-primary); }
+.history-stat-lbl { font-size: 0.68rem; color: var(--text-tertiary); margin-top: 0.2rem; }
 .history-timeline { margin-top: 1.2rem; }
-.history-timeline h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); margin-bottom: 0.8rem; }
-.history-tl-item { display: flex; gap: 0.8rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; align-items: flex-start; }
-.history-tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); margin-top: 0.35rem; flex-shrink: 0; }
-.history-tl-date { font-size: 0.7rem; color: var(--gray); white-space: nowrap; }
+.history-timeline h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); margin-bottom: 0.8rem; }
+.history-tl-item { display: flex; gap: 0.8rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.82rem; align-items: flex-start; color: var(--text-secondary); }
+.history-tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-top: 0.35rem; flex-shrink: 0; box-shadow: 0 0 6px var(--accent); }
+.history-tl-date { font-size: 0.7rem; color: var(--text-tertiary); white-space: nowrap; }
 
 /* ── RESPONSIVE ── */
 @media(max-width:1000px) {
@@ -245,17 +318,19 @@ nav {
 </head>
 <body>
 
-<div class="util-bar">🍸 Master the art of mixology �?from classic cocktails to modern twists. <a href="../../index.html">Back to Home �?/a></div>
+<div class="util-bar">🍸 Master the art of mixology — from classic cocktails to modern twists. <a href="../../index.html">Back to Home →</a></div>
 
 <nav>
   <div class="nav-left-group">
     <div class="nav-logo" onclick="location.href='../../index.html'">HobbyHub</div>
+  </div>
+  <div class="nav-ai-forum">
     <a class="nav-sell-btn" href="#">🤖<br>AI</a>
     <a class="nav-sell-btn" href="#">💬<br>Forum</a>
   </div>
   <div class="nav-search">
     <select>
-      <option>All cocktails</option>
+      <option>All categories</option>
       <option>Classics</option>
       <option>Tropical</option>
       <option>Spirit-Forward</option>
@@ -266,7 +341,7 @@ nav {
   </div>
   <div class="nav-actions">
     <a class="nav-sell-btn" href="#">🔖<br>Saved</a>
-    <a class="nav-sell-btn" href="#">🗄�?br>My Stash</a>
+    <a class="nav-sell-btn" href="#">🗄️<br>My Stash</a>
     <a class="nav-sell-btn" href="#">🛒<br>Cart</a>
     <button class="nav-signin">Sign in</button>
     <button class="nav-register">Register</button>
@@ -288,7 +363,7 @@ nav {
   <div class="mix-hero-inner">
     <div class="mix-hero-icon">🍸</div>
     <h1>The Art of Mixology</h1>
-    <p>From timeless classics to bold modern creations �?master every pour, shake, and stir. Each cocktail tells a story.</p>
+    <p>From timeless classics to bold modern creations — master every pour, shake, and stir. Each cocktail tells a story.</p>
     <div class="mix-hero-stats">
       <div class="mix-stat"><div class="mix-stat-num">18</div><div class="mix-stat-label">Cocktails</div></div>
       <div class="mix-stat"><div class="mix-stat-num">6</div><div class="mix-stat-label">Categories</div></div>
@@ -302,11 +377,11 @@ nav {
   <div class="filter-label">🔍 Filter</div>
   <div class="filter-chips">
     <button class="filter-chip active" data-filter="all">All</button>
-    <button class="filter-chip" data-filter="classic">🏛�?Classics</button>
+    <button class="filter-chip" data-filter="classic">🏛️ Classics</button>
     <button class="filter-chip" data-filter="tropical">🌴 Tropical</button>
     <button class="filter-chip" data-filter="spirit">🥃 Spirit-Forward</button>
     <button class="filter-chip" data-filter="sparkling">🥂 Sparkling</button>
-    <button class="filter-chip" data-filter="modern">�?Modern</button>
+    <button class="filter-chip" data-filter="modern">✨ Modern</button>
   </div>
 </div>
 
@@ -337,24 +412,24 @@ nav {
 
 <script>
 const COCKTAILS = [
-  { name:"Margarita", emoji:"🍸", cat:"classic", diff:"Easy", glass:"Margarita Glass", abv:"18%", color1:"#e8f8e0",color2:"#c8e8b0", flavor:"Bright lime, smooth tequila, salted rim �?the perfect balance of sweet, sour & salty.", ingredients:["Tequila","Triple Sec","Lime Juice","Salt"] },
-  { name:"Mojito", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Highball", abv:"12%", color1:"#e0f4e8",color2:"#b8e8c8", flavor:"Fresh mint, crisp lime, rum & soda �?Cuba's most refreshing export.", ingredients:["White Rum","Lime","Mint","Sugar","Soda"] },
-  { name:"Old Fashioned", emoji:"🥃", cat:"spirit", diff:"Easy", glass:"Rocks", abv:"32%", color1:"#f4e8d8",color2:"#d4b898", flavor:"Timeless. Bourbon, bitters, sugar & a twist of orange �?the gentleman's cocktail.", ingredients:["Bourbon","Angostura","Sugar","Orange Peel"] },
+  { name:"Margarita", emoji:"🍸", cat:"classic", diff:"Easy", glass:"Margarita Glass", abv:"18%", color1:"#e8f8e0",color2:"#c8e8b0", flavor:"Bright lime, smooth tequila, salted rim — the perfect balance of sweet, sour & salty.", ingredients:["Tequila","Triple Sec","Lime Juice","Salt"] },
+  { name:"Mojito", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Highball", abv:"12%", color1:"#e0f4e8",color2:"#b8e8c8", flavor:"Fresh mint, crisp lime, rum & soda — Cuba's most refreshing export.", ingredients:["White Rum","Lime","Mint","Sugar","Soda"] },
+  { name:"Old Fashioned", emoji:"🥃", cat:"spirit", diff:"Easy", glass:"Rocks", abv:"32%", color1:"#f4e8d8",color2:"#d4b898", flavor:"Timeless. Bourbon, bitters, sugar & a twist of orange — the gentleman's cocktail.", ingredients:["Bourbon","Angostura","Sugar","Orange Peel"] },
   { name:"Negroni", emoji:"🍸", cat:"spirit", diff:"Easy", glass:"Rocks", abv:"24%", color1:"#fce4e0",color2:"#f0b8a8", flavor:"Bold, bitter, and utterly sophisticated. Equal parts gin, Campari & sweet vermouth.", ingredients:["Gin","Campari","Sweet Vermouth"], image:"../../assets/images/Negroni.jpg", detailUrl:"negroni.html" },
-  { name:"Cosmopolitan", emoji:"🍸", cat:"modern", diff:"Easy", glass:"Coupe", abv:"20%", color1:"#fce0e8",color2:"#f8b8cc", flavor:"Vodka, cranberry, triple sec & lime �?the glamour-pink icon of the '90s.", ingredients:["Vodka","Triple Sec","Cranberry","Lime"] },
+  { name:"Cosmopolitan", emoji:"🍸", cat:"modern", diff:"Easy", glass:"Coupe", abv:"20%", color1:"#fce0e8",color2:"#f8b8cc", flavor:"Vodka, cranberry, triple sec & lime — the glamour-pink icon of the '90s.", ingredients:["Vodka","Triple Sec","Cranberry","Lime"] },
   { name:"Dry Martini", emoji:"🍸", cat:"classic", diff:"Medium", glass:"Martini", abv:"28%", color1:"#f0f4f8",color2:"#d0dce8", flavor:"Ice-cold gin, a whisper of dry vermouth, olive or twist. Elegance in a glass.", ingredients:["Gin","Dry Vermouth","Olive/Lemon"] },
-  { name:"Daiquiri", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Coupe", abv:"16%", color1:"#f8f4e8",color2:"#e8dcc0", flavor:"Rum, fresh lime & simple syrup �?Hemingway's favorite, pure and simple.", ingredients:["White Rum","Lime Juice","Simple Syrup"] },
+  { name:"Daiquiri", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Coupe", abv:"16%", color1:"#f8f4e8",color2:"#e8dcc0", flavor:"Rum, fresh lime & simple syrup — Hemingway's favorite, pure and simple.", ingredients:["White Rum","Lime Juice","Simple Syrup"] },
   { name:"Whiskey Sour", emoji:"🥃", cat:"classic", diff:"Medium", glass:"Rocks", abv:"18%", color1:"#f8ecd8",color2:"#e0c8a0", flavor:"Bourbon, lemon, sugar & egg white for that silky foam top. A true classic.", ingredients:["Bourbon","Lemon","Simple Syrup","Egg White"] },
-  { name:"Moscow Mule", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Copper Mug", abv:"12%", color1:"#f8f4ec",color2:"#e8dcc8", flavor:"Vodka, spicy ginger beer & lime �?served in that iconic copper mug.", ingredients:["Vodka","Ginger Beer","Lime"] },
-  { name:"Piña Colada", emoji:"🍹", cat:"tropical", diff:"Easy", glass:"Hurricane", abv:"10%", color1:"#fcf8f0",color2:"#f0e4c8", flavor:"Rum, coconut cream & pineapple �?if you like piña coladas, this is paradise.", ingredients:["White Rum","Coconut Cream","Pineapple"] },
-  { name:"Aperol Spritz", emoji:"🥂", cat:"sparkling", diff:"Easy", glass:"Wine Glass", abv:"8%", color1:"#fce8d8",color2:"#f8c8a0", flavor:"Aperol, prosecco & soda �?the sunset-orange Italian aperitivo. Effortlessly chic.", ingredients:["Aperol","Prosecco","Soda","Orange"] },
-  { name:"Espresso Martini", emoji:"🍸", cat:"modern", diff:"Medium", glass:"Coupe", abv:"20%", color1:"#e8e0d8",color2:"#c8b898", flavor:"Vodka, coffee liqueur & fresh espresso �?the pick-me-up that puts you down.", ingredients:["Vodka","Kahlúa","Espresso","Simple Syrup"] },
+  { name:"Moscow Mule", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Copper Mug", abv:"12%", color1:"#f8f4ec",color2:"#e8dcc8", flavor:"Vodka, spicy ginger beer & lime — served in that iconic copper mug.", ingredients:["Vodka","Ginger Beer","Lime"] },
+  { name:"Pina Colada", emoji:"🍹", cat:"tropical", diff:"Easy", glass:"Hurricane", abv:"10%", color1:"#fcf8f0",color2:"#f0e4c8", flavor:"Rum, coconut cream & pineapple — if you like piña coladas, this is paradise.", ingredients:["White Rum","Coconut Cream","Pineapple"] },
+  { name:"Aperol Spritz", emoji:"🥂", cat:"sparkling", diff:"Easy", glass:"Wine Glass", abv:"8%", color1:"#fce8d8",color2:"#f8c8a0", flavor:"Aperol, prosecco & soda — the sunset-orange Italian aperitivo. Effortlessly chic.", ingredients:["Aperol","Prosecco","Soda","Orange"] },
+  { name:"Espresso Martini", emoji:"🍸", cat:"modern", diff:"Medium", glass:"Coupe", abv:"20%", color1:"#e8e0d8",color2:"#c8b898", flavor:"Vodka, coffee liqueur & fresh espresso — the pick-me-up that puts you down.", ingredients:["Vodka","Kahla","Espresso","Simple Syrup"] },
   { name:"Manhattan", emoji:"🥃", cat:"spirit", diff:"Easy", glass:"Coupe", abv:"30%", color1:"#f4e0d0",color2:"#d4a888", flavor:"Rye whiskey, sweet vermouth & bitters. The king of brown-spirit cocktails.", ingredients:["Rye Whiskey","Sweet Vermouth","Angostura"] },
-  { name:"Mai Tai", emoji:"🍹", cat:"tropical", diff:"Medium", glass:"Rocks", abv:"22%", color1:"#fce8d0",color2:"#f8c898", flavor:"Dark & light rums, orgeat, orange liqueur & lime �?tiki perfection.", ingredients:["Dark Rum","Light Rum","Orgeat","Orange Liqueur","Lime"] },
-  { name:"Bloody Mary", emoji:"🍹", cat:"classic", diff:"Medium", glass:"Highball", abv:"10%", color1:"#fce4e0",color2:"#f0b8a8", flavor:"Vodka, tomato juice & secret spices �?the ultimate brunch companion.", ingredients:["Vodka","Tomato Juice","Lemon","Worcestershire","Tabasco"] },
-  { name:"French 75", emoji:"🥂", cat:"sparkling", diff:"Easy", glass:"Flute", abv:"18%", color1:"#f8f4ec",color2:"#e8dcc8", flavor:"Gin, lemon, sugar & champagne �?named after a WWI artillery gun. It hits.", ingredients:["Gin","Lemon","Simple Syrup","Champagne"] },
-  { name:"Paloma", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Highball", abv:"12%", color1:"#fce8e8",color2:"#f8c8cc", flavor:"Tequila, grapefruit soda & lime �?Mexico's most refreshing secret.", ingredients:["Tequila","Grapefruit Soda","Lime","Salt"] },
-  { name:"Dark 'n' Stormy", emoji:"🥃", cat:"spirit", diff:"Easy", glass:"Highball", abv:"14%", color1:"#e8dcd0",color2:"#c8b898", flavor:"Dark rum & spicy ginger beer �?Bermuda's gift to the drinking world.", ingredients:["Dark Rum","Ginger Beer","Lime"] }
+  { name:"Mai Tai", emoji:"🍹", cat:"tropical", diff:"Medium", glass:"Rocks", abv:"22%", color1:"#fce8d0",color2:"#f8c898", flavor:"Dark & light rums, orgeat, orange liqueur & lime — tiki perfection.", ingredients:["Dark Rum","Light Rum","Orgeat","Orange Liqueur","Lime"] },
+  { name:"Bloody Mary", emoji:"🍹", cat:"classic", diff:"Medium", glass:"Highball", abv:"10%", color1:"#fce4e0",color2:"#f0b8a8", flavor:"Vodka, tomato juice & secret spices — the ultimate brunch companion.", ingredients:["Vodka","Tomato Juice","Lemon","Worcestershire","Tabasco"] },
+  { name:"French 75", emoji:"🥂", cat:"sparkling", diff:"Easy", glass:"Flute", abv:"18%", color1:"#f8f4ec",color2:"#e8dcc8", flavor:"Gin, lemon, sugar & champagne — named after a WWI artillery gun. It hits.", ingredients:["Gin","Lemon","Simple Syrup","Champagne"] },
+  { name:"Paloma", emoji:"🍹", cat:"classic", diff:"Easy", glass:"Highball", abv:"12%", color1:"#fce8e8",color2:"#f8c8cc", flavor:"Tequila, grapefruit soda & lime — Mexico's most refreshing secret.", ingredients:["Tequila","Grapefruit Soda","Lime","Salt"] },
+  { name:"Dark 'n' Stormy", emoji:"🥃", cat:"spirit", diff:"Easy", glass:"Highball", abv:"14%", color1:"#e8dcd0",color2:"#c8b898", flavor:"Dark rum & spicy ginger beer — Bermuda's gift to the drinking world.", ingredients:["Dark Rum","Ginger Beer","Lime"] }
 ];
 
 function diffClass(d) { if(d==="Easy")return"diff-easy"; if(d==="Medium")return"diff-medium"; return"diff-hard"; }
@@ -406,10 +481,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ══════════════════════════════════════════�?
+/* ===================================
    HOLD-TO-REVEAL HISTORY FEATURE
-   ══════════════════════════════════════════�?*/
-
+   =================================== */
 const HOLD_DURATION = 2000;
 let holdTimer = null;
 let holdStartTime = 0;
@@ -464,7 +538,7 @@ function holdComplete() {
   holdActive = false;
   document.getElementById('holdOverlay').classList.remove('active');
   if (!holdTarget) return;
-  const name = holdTarget.dataset.hobby || holdTarget.textContent.trim().slice(0,2) === '' ? holdTarget.textContent.trim() : (holdTarget.dataset.hobby || 'this hobby');
+  const name = holdTarget.dataset.hobby || holdTarget.textContent.trim().slice(0, 30) || 'this hobby';
   const emoji = holdTarget.dataset.emoji || '🎯';
   showHistory(name, emoji);
 }
@@ -472,19 +546,19 @@ function holdComplete() {
 function showHistory(name, emoji) {
   const title = document.getElementById('historyModalTitle');
   const body = document.getElementById('historyModalBody');
-  title.innerHTML = `📜 ${emoji} ${name} �?Your Journey`;
+  title.innerHTML = '📜 ' + emoji + ' ' + name + ' — Your Journey';
 
-  const startDate = new Date(2022, Math.floor(Math.random()*12), Math.floor(Math.random()*28)+1);
+  const startDate = new Date(2022, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
   const projects = Math.floor(Math.random() * 60) + 10;
   const hours = Math.floor(Math.random() * 500) + 50;
-  const level = ['Beginner','Intermediate','Advanced','Master'][Math.floor(Math.random()*4)];
+  const level = ['Beginner', 'Intermediate', 'Advanced', 'Master'][Math.floor(Math.random() * 4)];
 
   body.innerHTML = `
     <div class="history-icon-circle" style="background:var(--orange-bg);">${emoji}</div>
     <p style="text-align:center;color:var(--gray);font-size:0.85rem;">Here's a snapshot of your journey with <strong>${name}</strong>.</p>
     <div class="history-stat-grid">
       <div class="history-stat">
-        <div class="history-stat-val">${startDate.toLocaleDateString('en-US',{month:'long',year:'numeric'})}</div>
+        <div class="history-stat-val">${startDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div>
         <div class="history-stat-lbl">Since</div>
       </div>
       <div class="history-stat">
@@ -502,11 +576,11 @@ function showHistory(name, emoji) {
     </div>
     <div class="history-timeline">
       <h4>🕐 Recent Milestones</h4>
-      <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>First attempt</strong> �?${startDate.toLocaleDateString('en-US',{month:'long',year:'numeric'})}</div></div>
-      <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>Completed 10th project</strong> �?${new Date(startDate.getTime()+1000*60*60*24*90).toLocaleDateString('en-US',{month:'long',year:'numeric'})}</div></div>
-      <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>Reached ${level} level</strong> �?placeholder milestone</div></div>
+      <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>First attempt</strong> — ${startDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div></div>
+      <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>Completed 10th project</strong> — ${new Date(startDate.getTime() + 1000 * 60 * 60 * 24 * 90).toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div></div>
+      <div class="history-tl-item"><div class="history-tl-dot"></div><div><strong>Reached ${level} level</strong> — placeholder milestone</div></div>
     </div>
-    <p style="text-align:center;margin-top:1rem;font-size:0.72rem;color:var(--gray);">�?More detailed history coming soon �?this is a placeholder</p>
+    <p style="text-align:center;margin-top:1rem;font-size:0.72rem;color:var(--gray);">✨ More detailed history coming soon — this is a placeholder</p>
   `;
   document.getElementById('historyModal').classList.add('open');
 }
